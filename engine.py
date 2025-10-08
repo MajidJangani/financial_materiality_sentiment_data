@@ -49,16 +49,16 @@ DEFAULT_CONFIG = {
     'framework1': {
         'use_binary_enhancement': True,
         'target_features_stage1': 12,  # Stage 1: 27 → 12
-        'target_features_stage2': 6,   # Stage 2: 12 → 6 (CHANGED FROM 8)
+        'target_features_stage2': 6,   # Stage 2: 12 → 6 
         'mi_weight': 0.5,
         'binary_auc_weight': 0.3,
         'rf_weight': 0.2,
         'cv_splits': 3,
     },
     'framework2': {
-        'window_size': 26,            # 26-week windows (approx 6 months)
+        'window_size': 39,            # approx 9 months
         'step_size': 13,              # 13-week steps (quarterly)
-        'min_window_samples': 26,
+        'min_window_samples': 52,
         'enable_individual_regime_tracking': True,
         'enable_pillar_regime_detection': True,
         'regime_min_length': 3,       # Minimum 3 windows for regime
@@ -1132,7 +1132,14 @@ def run_walkforward_analysis_comprehensive_original(full_df: pd.DataFrame,
         if window_result is not None:
             walkforward_results.append(window_result)
             period_str = window_result['period_start'].strftime('%Y-%m')
-            print(f"      Window {window_id}: {period_str} - Dominant: {window_result['dominant_pillar']}")
+            top_driver = window_result['feature_rankings'][0]
+            print(f"      Window {window_id}: {period_str}")
+            print(f"        Dominant: {window_result['dominant_pillar']}")
+            print(f"        Top Driver: {top_driver['driver_number']} ({top_driver['pillar']})")
+            print(f"        Scores - MI: {top_driver['mi_score']:.3f} | "
+                f"AUC: {top_driver['binary_auc_score']:.3f} | "
+                f"F1: {top_driver['three_class_f1_score']:.3f} | "
+                f"Combined: {top_driver['combined_score']:.3f}")    
     
     if len(walkforward_results) < 2:
         raise ValueError(f"Insufficient valid windows: {len(walkforward_results)}")

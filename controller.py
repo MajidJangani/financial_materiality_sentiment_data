@@ -53,9 +53,9 @@ class DatabaseConfig:
     
     def __init__(self, 
                  host: str = "localhost",
-                 database: str = "esg_database",
+                 database: str = "ESG_QR_1",
                  user: str = "postgres",
-                 password: str = "your_password",
+                 password: str = "Psg@240425",
                  port: int = 5432):
         """
         Initialize database configuration.
@@ -151,7 +151,6 @@ class ESGMaterialityController:
         """
         Establish connection to PostgreSQL database.
         
-        TUTORIAL: This method creates a database connection that will be
         reused for multiple queries. Always call disconnect() when done!
         
         Returns:
@@ -167,11 +166,11 @@ class ESGMaterialityController:
         """
         try:
             self.connection = psycopg2.connect(
-                host=self.db_config.host,
-                database=self.db_config.database,
-                user=self.db_config.user,
-                password=self.db_config.password,
-                port=self.db_config.port
+                host="localhost",
+                database="ESG_QR_1",
+                user="postgres",
+                password="Psg@240425",
+                port=5432
             )
             print(f"✓ Connected to database: {self.db_config.database}")
             return self.connection
@@ -696,9 +695,12 @@ class ESGMaterialityController:
                         'pillar': feature_info['pillar'],
                         'rank': feature_info['rank'],
                         'combined_score': feature_info['combined_score'],
-                        'mi_score': feature_info['mi_score']
+                        'mi_score': feature_info['mi_score'],
+                        'correlation': feature_info['correlation'],           
+                        'binary_auc_score': feature_info['binary_auc_score'], 
+                        'three_class_f1_score': feature_info['three_class_f1_score']  
                     })
-            
+                                
             df_temporal = pd.DataFrame(temporal_data)
             temporal_file = os.path.join(csv_dir, f"entity_{entity_id}_temporal_{timestamp}.csv")
             df_temporal.to_csv(temporal_file, index=False)
@@ -1047,5 +1049,5 @@ if __name__ == "__main__":
     print(f"Batch success rate: {batch_results['summary']['success_rate']:.1%}")
     
     print("\n" + "="*70)
-    print("✅EXAMPLES COMPLETE - Check output/ directory for results")
+    print("EXAMPLES COMPLETE - Check output/ directory for results")
     print("="*70)
