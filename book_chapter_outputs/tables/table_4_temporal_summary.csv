@@ -1,0 +1,9 @@
+Metric,Value
+Window Size (weeks),52
+Step Size (weeks),13
+Total Windows Analyzed,17
+Analysis Period,2020-01-06T00:00:00 to 2024-12-23T00:00:00
+Current ESG Regime,Social
+Total Regimes Detected,3
+Regime Stability (%),82.4%
+Average Drivers per Window,6

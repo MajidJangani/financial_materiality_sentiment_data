@@ -1,0 +1,10 @@
+
+Figure 3 Description:
+This figure tracks the materiality scores of the top 5 ESG drivers across all temporal windows. 
+Each line represents a driver's F1 score (3-class classification performance) over time, revealing 
+dynamic patterns in ESG materiality. Consistently high scores indicate drivers with stable 
+predictive power, while fluctuating patterns suggest time-varying importance. Crossing lines 
+signal regime transitions where different ESG factors gain or lose relevance. The walk-forward 
+methodology ensures all scores represent out-of-sample performance, preventing overfitting and 
+validating drivers' genuine predictive utility in practical applications.
+        

@@ -1,0 +1,11 @@
+
+Figure 2 Description:
+This three-panel figure illustrates Framework 1's feature selection process. Panel (a) plots 
+Mutual Information against AUC scores, with bubble size indicating composite importance. Drivers 
+in the upper-right quadrant demonstrate both high non-linear relationship strength (MI) and strong 
+binary classification power (AUC). Panel (b) shows Random Forest importance scores from Stage 2 
+refinement, where the algorithm identifies features most useful for recursive partitioning. Panel 
+(c) displays final composite rankings, integrating all metrics to ensure selected drivers excel 
+across multiple evaluation dimensions. Color coding reveals pillar-specific patterns in feature 
+importance.
+        
