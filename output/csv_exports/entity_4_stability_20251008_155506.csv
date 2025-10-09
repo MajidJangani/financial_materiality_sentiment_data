@@ -1,7 +1,0 @@
-driver_number,pillar,avg_rank,combined_stability,current_regime,is_emerging,is_declining
-9,Social,4.411764705882353,0.41524393403381565,stable,False,True
-14,Social,2.823529411764706,0.5310017634609113,stable,False,True
-27,Governance,3.4705882352941178,0.5145612731453182,stable,False,False
-18,Social,2.8823529411764706,0.5518234003042121,stable,False,False
-21,Governance,3.0588235294117645,0.5561582155140502,stable,False,False
-1,Environmental,4.352941176470588,0.480335644538348,stable,False,False
