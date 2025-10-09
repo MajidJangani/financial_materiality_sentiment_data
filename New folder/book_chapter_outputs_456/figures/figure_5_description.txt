@@ -1,0 +1,10 @@
+
+Figure 5 Description:
+Panel (a) presents the final materiality rankings, ordered by combined stability scores that 
+integrate temporal consistency and predictive performance. Bar colors indicate ESG pillar 
+affiliation, revealing which dimensions drive material financial impact. Higher bars represent 
+drivers with both strong predictive power and stable importance across market conditions. Panel 
+(b) aggregates pillar contributions, showing the relative weight of Environmental, Social, and 
+Governance factors in overall ESG materiality. This distribution informs strategic resource 
+allocation across ESG dimensions and highlights entity-specific materiality profiles.
+        

@@ -1,0 +1,76 @@
+{
+  "start_time": "2025-10-09T14:05:07.654623",
+  "entity_ids": [
+    1,
+    456
+  ],
+  "results": {
+    "1": {
+      "status": "SUCCESS",
+      "summary": {
+        "entity_id": 1,
+        "top_material_drivers": [
+          3,
+          13,
+          1,
+          12,
+          15,
+          24
+        ],
+        "top_stable_drivers": [
+          24,
+          3,
+          12
+        ],
+        "emerging_drivers": [],
+        "current_esg_regime": "Environmental",
+        "regime_stability": 0.8235294117647058,
+        "windows_analyzed": 17
+      },
+      "json_file": "output\\json_results\\entity_1_results_20251009_140509.json",
+      "csv_files": {
+        "framework1": "output\\csv_exports\\entity_1_framework1_20251009_140509.csv",
+        "temporal": "output\\csv_exports\\entity_1_temporal_20251009_140509.csv",
+        "regimes": "output\\csv_exports\\entity_1_regimes_20251009_140509.csv",
+        "stability": "output\\csv_exports\\entity_1_stability_20251009_140509.csv"
+      }
+    },
+    "456": {
+      "status": "SUCCESS",
+      "summary": {
+        "entity_id": 456,
+        "top_material_drivers": [
+          12,
+          10,
+          8,
+          15,
+          19,
+          24
+        ],
+        "top_stable_drivers": [
+          12,
+          24,
+          10
+        ],
+        "emerging_drivers": [],
+        "current_esg_regime": "Social",
+        "regime_stability": 0.8235294117647058,
+        "windows_analyzed": 17
+      },
+      "json_file": "output\\json_results\\entity_456_results_20251009_140510.json",
+      "csv_files": {
+        "framework1": "output\\csv_exports\\entity_456_framework1_20251009_140510.csv",
+        "temporal": "output\\csv_exports\\entity_456_temporal_20251009_140510.csv",
+        "regimes": "output\\csv_exports\\entity_456_regimes_20251009_140510.csv",
+        "stability": "output\\csv_exports\\entity_456_stability_20251009_140510.csv"
+      }
+    }
+  },
+  "summary": {
+    "total_entities": 2,
+    "successful": 2,
+    "failed": 0,
+    "success_rate": 1.0
+  },
+  "end_time": "2025-10-09T14:05:10.962793"
+}

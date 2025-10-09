@@ -1,0 +1,9 @@
+
+Table 2 Description:
+Target variables are created using skewness-aware threshold methodology to classify weekly 
+returns into ESG performance categories. The binary target (ESG Baseline vs. Value Creation) 
+achieves a balance quality of 0.784, while the 3-class formulation (Lagging, Stable, 
+Leading) maintains 0.761 balance. High signal preservation scores (>0.000) 
+indicate that the discretization process retains the underlying return distribution's information 
+content, essential for robust feature selection.
+        

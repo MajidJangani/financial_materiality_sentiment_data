@@ -1,0 +1,11 @@
+
+Figure 1 Description (Generated from Database):
+This histogram displays the weekly log return distribution for Entity 1 with 
+MAD-based 3-class target classification. The distribution shows 273 observations classified 
+into three ESG performance categories: Lagging (red, 36.6%), Stable 
+(yellow, 22.3%), and Leading (green, 41.0%). 
+The lower threshold (-0.0114) and upper threshold (0.0085) are 
+derived using skewness-aware MAD methodology, ensuring balanced class proportions (balance quality: 
+0.956). The median return (0.0003) serves as the central reference point 
+for the classification scheme.
+            

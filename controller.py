@@ -761,21 +761,33 @@ class ESGMaterialityController:
         JSON can't handle numpy arrays, pandas timestamps, etc.
         This method recursively converts them to standard Python types.
         """
-        if isinstance(obj, np.integer):
+        if isinstance(obj, (np.integer, np.int64, np.int32)):
             return int(obj)
-        elif isinstance(obj, np.floating):
+        elif isinstance(obj, (np.floating, np.float64, np.float32)):
             return float(obj)
         elif isinstance(obj, np.ndarray):
             return obj.tolist()
-        elif isinstance(obj, pd.Timestamp):
+        elif isinstance(obj, (pd.Timestamp, pd.DatetimeIndex)):
             return obj.isoformat()
+        elif isinstance(obj, datetime):
+            return obj.isoformat()
+        elif isinstance(obj, pd.Series):
+            return obj.to_dict()
+        elif isinstance(obj, pd.DataFrame):
+            return obj.to_dict(orient='records')
         elif isinstance(obj, dict):
             return {k: self._convert_for_json(v) for k, v in obj.items()}
-        elif isinstance(obj, list):
+        elif isinstance(obj, (list, tuple)):
             return [self._convert_for_json(v) for v in obj]
-        else:
+        elif isinstance(obj, (str, int, float, bool, type(None))):
             return obj
-    
+        else:
+            # For any other type, try to convert to string as fallback
+            try:
+                return str(obj)
+            except:
+                return None
+        
     # -----------------------------------------------------------------
     # Batch Processing Methods
     # -----------------------------------------------------------------
@@ -1045,7 +1057,7 @@ if __name__ == "__main__":
     # ==========================================
     print("\n\n Approach 4: Batch analysis")
     
-    batch_results = batch_analysis(entity_ids=[1, 4, 24, 126])
+    batch_results = batch_analysis(entity_ids=[1, 456])
     print(f"Batch success rate: {batch_results['summary']['success_rate']:.1%}")
     
     print("\n" + "="*70)

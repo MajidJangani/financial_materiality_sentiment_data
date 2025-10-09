@@ -1012,10 +1012,10 @@ def calculate_window_materiality_comprehensive(window_df: pd.DataFrame,
             three_class_f1_norm = feature_f1s_3class[i]
             
             combined = (
-                0.3 * mi_norm +
-                0.2 * corr_norm +
-                0.2 * binary_auc_norm +
-                0.3 * three_class_f1_norm
+                0.30 * mi_norm +           # 30% MI (non-linear relationships)
+                0.05 * corr_norm +         # 5% Correlation (minimal - just validation)
+                0.25 * binary_auc_norm +   # 25% Binary AUC (directionality)
+                0.40 * three_class_f1_norm # 40% F1 (primary performance metric)
             )
             combined_scores.append(combined)
         

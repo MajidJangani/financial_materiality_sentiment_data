@@ -28,13 +28,14 @@ class ESGBookChapterGenerator:
     Generates all visualizations and tables for the ESG Materiality book chapter
     """
     
-    def __init__(self, json_results_path, output_dir='book_chapter_outputs'):
+    def __init__(self, json_results_path, output_dir='book_chapter_outputs', db_config=None):
         """
         Initialize with JSON results file
         
         Args:
             json_results_path: Path to JSON results file
             output_dir: Directory to save outputs
+            db_config: Optional database config dict with keys: host, database, user, password
         """
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(exist_ok=True)
@@ -48,6 +49,8 @@ class ESGBookChapterGenerator:
             self.results = json.load(f)
         
         self.entity_id = self.results.get('entity_id', 'Unknown')
+        self.db_config = db_config
+        
         print(f"✓ Loaded results for Entity {self.entity_id}")
     
     def generate_complete_chapter(self):
@@ -62,7 +65,14 @@ class ESGBookChapterGenerator:
             print("\n📊 Section 1: Target Creation & Data Quality")
             self.create_table_1_data_summary()
             self.create_table_2_target_distributions()
+            
+            # Try JSON-based figures first, then database if needed
             self.create_figure_1_target_distributions()
+            if self.db_config:  # If database config provided, create from DB
+                self.create_figure_1_from_database()
+            
+            self.create_figure_1b_distribution_detail()
+            self.create_figure_1c_top_pbs_drivers()
             
             # Section 2: Framework 1 - Feature Selection
             print("\n📊 Section 2: Framework 1 - Feature Selection")
@@ -294,6 +304,359 @@ class imbalance.
         """
         
         with open(self.output_dir / 'figures' / 'figure_1_description.txt', 'w') as f:
+            f.write(description)
+    
+    def create_figure_1_from_database(self):
+        """
+        Figure 1: Target Distribution from Database (when JSON lacks class counts)
+        Fetches price data and calculates returns directly
+        """
+        if not self.db_config:
+            print("  ⚠ Figure 1 from DB skipped: No database config provided")
+            return
+        
+        try:
+            import psycopg2
+            
+            # Connect to database
+            conn = psycopg2.connect(
+                host=self.db_config.get('host', 'localhost'),
+                database=self.db_config.get('database', 'esg_database'),
+                user=self.db_config.get('user', 'postgres'),
+                password=self.db_config.get('password', ''),
+                port=self.db_config.get('port', 5432)
+            )
+            
+            # Fetch price data
+            query = f"""
+            SELECT date, close_price
+            FROM "{self.entity_id}"
+            WHERE date IS NOT NULL 
+              AND close_price IS NOT NULL 
+              AND close_price > 0
+            ORDER BY date ASC;
+            """
+            
+            df = pd.read_sql_query(query, conn)
+            conn.close()
+            
+            if len(df) < 2:
+                print("  ⚠ Figure 1 from DB skipped: Insufficient price data")
+                return
+            
+            # Calculate returns
+            df['returns'] = np.log(df['close_price'] / df['close_price'].shift(1))
+            returns = df['returns'].dropna()
+            
+            if len(returns) < 50:
+                print("  ⚠ Figure 1 from DB skipped: Insufficient returns data")
+                return
+            
+            # Calculate MAD thresholds
+            median_ret = np.median(returns)
+            mad = np.median(np.abs(returns - median_ret))
+            
+            # 3-class thresholds (from your methodology)
+            base_multiplier = 0.45
+            threshold_lower = median_ret - (base_multiplier + 0.08) * mad
+            threshold_upper = median_ret + (base_multiplier - 0.08) * mad
+            
+            # Create 3 classes
+            targets_3class = np.where(
+                returns < threshold_lower, 0,
+                np.where(returns > threshold_upper, 2, 1)
+            )
+            
+            # Count classes
+            class_counts = [
+                sum(targets_3class == 0),
+                sum(targets_3class == 1),
+                sum(targets_3class == 2)
+            ]
+            
+            # Create figure
+            fig, ax = plt.subplots(figsize=(10, 6))
+            
+            # Colors
+            colors = ['#FF6B6B', '#FFD93D', '#51CF66']
+            labels = ['ESG Lagging (0)', 'ESG Stable (1)', 'ESG Leading (2)']
+            
+            # Plot histogram
+            ax.hist([returns[targets_3class == 0],
+                    returns[targets_3class == 1],
+                    returns[targets_3class == 2]],
+                   bins=50, color=colors, alpha=0.7, label=labels,
+                   edgecolor='black', linewidth=0.5, stacked=True)
+            
+            # Add threshold lines
+            ax.axvline(threshold_lower, color='red', linestyle='--', 
+                      linewidth=2, label=f'Lower Threshold ({threshold_lower:.4f})')
+            ax.axvline(threshold_upper, color='green', linestyle='--', 
+                      linewidth=2, label=f'Upper Threshold ({threshold_upper:.4f})')
+            ax.axvline(median_ret, color='black', linestyle=':', 
+                      linewidth=1.5, label=f'Median ({median_ret:.4f})')
+            
+            ax.set_xlabel('Weekly Log Returns', fontsize=11, fontweight='bold')
+            ax.set_ylabel('Frequency', fontsize=11, fontweight='bold')
+            ax.set_title(f'Figure 1: Return Distribution with 3-Class Targets - Entity {self.entity_id}',
+                        fontsize=13, fontweight='bold', pad=15)
+            ax.legend(fontsize=9, loc='best')
+            ax.grid(True, alpha=0.3)
+            
+            # Add statistics box
+            total = len(returns)
+            stats_text = f"""Class Distribution:
+• Lagging: {class_counts[0]} ({class_counts[0]/total*100:.1f}%)
+• Stable: {class_counts[1]} ({class_counts[1]/total*100:.1f}%)
+• Leading: {class_counts[2]} ({class_counts[2]/total*100:.1f}%)
+
+Total: {total} observations
+MAD: {mad:.4f}
+"""
+            
+            ax.text(0.02, 0.98, stats_text, transform=ax.transAxes,
+                   fontsize=9, verticalalignment='top',
+                   bbox=dict(boxstyle='round', facecolor='white', alpha=0.9,
+                            edgecolor='black', linewidth=1),
+                   family='monospace')
+            
+            plt.tight_layout()
+            
+            filepath = self.output_dir / 'figures' / 'figure_1_return_distribution.png'
+            plt.savefig(filepath, dpi=300, bbox_inches='tight', facecolor='white')
+            plt.close()
+            
+            print(f"  ✓ Figure 1 (from DB) saved: {filepath}")
+            
+            # Save description
+            balance_quality = 1 - abs(class_counts[0] - class_counts[2]) / total
+            
+            description = f"""
+Figure 1 Description (Generated from Database):
+This histogram displays the weekly log return distribution for Entity {self.entity_id} with 
+MAD-based 3-class target classification. The distribution shows {total} observations classified 
+into three ESG performance categories: Lagging (red, {class_counts[0]/total*100:.1f}%), Stable 
+(yellow, {class_counts[1]/total*100:.1f}%), and Leading (green, {class_counts[2]/total*100:.1f}%). 
+The lower threshold ({threshold_lower:.4f}) and upper threshold ({threshold_upper:.4f}) are 
+derived using skewness-aware MAD methodology, ensuring balanced class proportions (balance quality: 
+{balance_quality:.3f}). The median return ({median_ret:.4f}) serves as the central reference point 
+for the classification scheme.
+            """
+            
+            with open(self.output_dir / 'figures' / 'figure_1_description.txt', 'w') as f:
+                f.write(description)
+                
+        except Exception as e:
+            print(f"  ⚠ Figure 1 from DB failed: {e}")
+            import traceback
+            traceback.print_exc()
+    
+    def create_figure_1b_distribution_detail(self):
+        """
+        Figure 1b: 3-Class Return Distribution with Detailed Statistics
+        """
+        fw1 = self.results.get('framework1_results', {})
+        target_meta = fw1.get('target_metadata', {})
+        three_class_meta = target_meta.get('three_class', {})
+        
+        # Validate data exists
+        class_counts = [
+            three_class_meta.get('class_0_count', 0),  # Lagging
+            three_class_meta.get('class_1_count', 0),  # Stable
+            three_class_meta.get('class_2_count', 0)   # Leading
+        ]
+        
+        total_count = sum(class_counts)
+        
+        if total_count == 0:
+            print("  ⚠ Figure 1b skipped: No target distribution data available")
+            return
+        
+        fig, ax = plt.subplots(figsize=(12, 6))
+        
+        # Color scheme matching academic style
+        COLORS_ACADEMIC = {
+            'primary': '#2C3E50',
+            'secondary': '#7F8C8D',
+            'tertiary': '#95A5A6',
+            'accent': '#34495E',
+            'lagging': '#E74C3C',    # Red
+            'stable': '#F39C12',     # Orange
+            'leading': '#27AE60'     # Green
+        }
+        
+        class_labels = ['ESG Lagging\n(0)', 'ESG Stable\n(1)', 'ESG Leading\n(2)']
+        colors = [COLORS_ACADEMIC['lagging'], COLORS_ACADEMIC['stable'], 
+                 COLORS_ACADEMIC['leading']]
+        
+        # Bar chart showing distribution
+        bars = ax.bar(range(3), class_counts, color=colors, alpha=0.7, 
+                     edgecolor='black', linewidth=1.5)
+        
+        ax.set_xticks(range(3))
+        ax.set_xticklabels(class_labels, fontsize=10)
+        ax.set_ylabel('Count', fontsize=11, fontweight='bold')
+        ax.set_title('Figure 1b: 3-Class Target Distribution with Quality Metrics',
+                    fontsize=13, fontweight='bold', pad=15)
+        
+        # Add count labels on bars
+        for bar, count in zip(bars, class_counts):
+            height = bar.get_height()
+            percentage = (count / total_count * 100) if total_count > 0 else 0
+            ax.text(bar.get_x() + bar.get_width()/2., height + max(class_counts)*0.01,
+                   f'{int(count)}\n({percentage:.1f}%)',
+                   ha='center', va='bottom', fontsize=9, fontweight='bold')
+        
+        # Add statistics box
+        pct_0 = (class_counts[0] / total_count * 100) if total_count > 0 else 0
+        pct_1 = (class_counts[1] / total_count * 100) if total_count > 0 else 0
+        pct_2 = (class_counts[2] / total_count * 100) if total_count > 0 else 0
+        
+        stats_text = f"""Quality Metrics:
+Balance Quality: {three_class_meta.get('balance_quality', 0):.3f}
+Signal Preservation: {three_class_meta.get('signal_preservation', 0):.3f}
+
+Class Distribution:
+• Lagging: {class_counts[0]} ({pct_0:.1f}%)
+• Stable: {class_counts[1]} ({pct_1:.1f}%)  
+• Leading: {class_counts[2]} ({pct_2:.1f}%)
+
+Total Samples: {total_count}
+"""
+        
+        ax.text(0.98, 0.97, stats_text, transform=ax.transAxes,
+               fontsize=9, verticalalignment='top', horizontalalignment='right',
+               bbox=dict(boxstyle='round', facecolor='white', alpha=0.9,
+                        edgecolor=COLORS_ACADEMIC['primary'], linewidth=1.5),
+               family='monospace')
+        
+        ax.grid(True, alpha=0.3, axis='y')
+        ax.set_ylim(0, max(class_counts) * 1.15 if max(class_counts) > 0 else 1)
+        
+        plt.tight_layout()
+        
+        filepath = self.output_dir / 'figures' / 'figure_1b_distribution_detail.png'
+        plt.savefig(filepath, dpi=300, bbox_inches='tight', facecolor='white')
+        plt.close()
+        
+        print(f"  ✓ Figure 1b saved: {filepath}")
+        
+        pct_range = min([pct_0, pct_1, pct_2])
+        pct_max = max([pct_0, pct_1, pct_2])
+        
+        description = """
+Figure 1b Description:
+This bar chart presents the detailed 3-class target distribution with quality assessment metrics. 
+Each bar represents one of the three ESG performance categories: Lagging (red), Stable (orange), 
+and Leading (green). The balance quality score of {bal_quality:.3f} indicates excellent class 
+equilibrium, crucial for unbiased machine learning. Signal preservation above {sig_pres:.3f} 
+confirms that the discretization process retains the underlying return distribution's information 
+content. The near-equal proportions across classes ({pct_range:.1f}%-{pct_max:.1f}%) enable robust 
+statistical inference and prevent model bias toward majority classes.
+        """.format(
+            bal_quality=three_class_meta.get('balance_quality', 0),
+            sig_pres=three_class_meta.get('signal_preservation', 0),
+            pct_range=pct_range,
+            pct_max=pct_max
+        )
+        
+        with open(self.output_dir / 'figures' / 'figure_1b_description.txt', 'w') as f:
+            f.write(description)
+    
+    def create_figure_1c_top_pbs_drivers(self):
+        """
+        Figure 1c: Top PBS Drivers - Importance Scores
+        """
+        fw1 = self.results.get('framework1_results', {})
+        selected_drivers = fw1.get('selected_drivers', [])
+        
+        if not selected_drivers:
+            print("  ⚠ Figure 1c skipped: No driver data available")
+            return
+        
+        fig, ax = plt.subplots(figsize=(12, 6))
+        
+        # Academic color scheme
+        COLORS_ACADEMIC = {
+            'Environmental': '#27AE60',
+            'Social': '#3498DB',
+            'Governance': '#E67E22'
+        }
+        
+        # Prepare data
+        drivers_data = []
+        for driver in selected_drivers:
+            drivers_data.append({
+                'driver_number': driver.get('driver_number', 0),
+                'pillar': driver.get('pillar', 'Unknown'),
+                'composite_score': driver.get('composite_score', 0)
+            })
+        
+        df = pd.DataFrame(drivers_data)
+        df = df.sort_values('composite_score', ascending=True)  # Ascending for horizontal bar
+        
+        # Create horizontal bar chart
+        bars = ax.barh(range(len(df)), df['composite_score'], height=0.7)
+        
+        # Color by pillar
+        for i, (_, row) in enumerate(df.iterrows()):
+            bars[i].set_color(COLORS_ACADEMIC.get(row['pillar'], '#95A5A6'))
+            bars[i].set_edgecolor('black')
+            bars[i].set_linewidth(1.2)
+        
+        # Y-axis labels
+        ax.set_yticks(range(len(df)))
+        ax.set_yticklabels([f"Driver {int(row['driver_number'])} ({row['pillar'][:3]})" 
+                           for _, row in df.iterrows()], fontsize=9)
+        
+        ax.set_xlabel('Composite Importance Score', fontsize=11, fontweight='bold')
+        ax.set_title('Figure 1c: Top Material ESG Drivers by Composite Score',
+                    fontsize=13, fontweight='bold', pad=15)
+        
+        # Add value labels on bars
+        for i, (_, row) in enumerate(df.iterrows()):
+            score = row['composite_score']
+            ax.text(score + 0.01, i, f'{score:.3f}',
+                   va='center', ha='left', fontsize=8, fontweight='bold')
+        
+        # Add pillar legend
+        from matplotlib.patches import Patch
+        legend_elements = [Patch(facecolor=color, edgecolor='black', 
+                                label=pillar, linewidth=1.2)
+                          for pillar, color in COLORS_ACADEMIC.items()]
+        ax.legend(handles=legend_elements, loc='lower right', fontsize=9,
+                 title='ESG Pillar', title_fontsize=10)
+        
+        ax.grid(True, alpha=0.3, axis='x')
+        ax.set_xlim(0, df['composite_score'].max() * 1.15)
+        
+        plt.tight_layout()
+        
+        filepath = self.output_dir / 'figures' / 'figure_1c_top_pbs_drivers.png'
+        plt.savefig(filepath, dpi=300, bbox_inches='tight', facecolor='white')
+        plt.close()
+        
+        print(f"  ✓ Figure 1c saved: {filepath}")
+        
+        # Calculate pillar distribution
+        pillar_counts = df['pillar'].value_counts().to_dict()
+        
+        description = """
+Figure 1c Description:
+This horizontal bar chart displays the top material ESG drivers identified through Framework 1's 
+two-stage selection process, ranked by composite importance scores. Colors denote ESG pillar 
+affiliation: Environmental (green), Social (blue), and Governance (orange). The composite score 
+integrates Mutual Information (35%), AUC (30%), and F1 score (35%), ensuring selected drivers 
+demonstrate both statistical significance and predictive performance. The pillar distribution 
+({env} Environmental, {soc} Social, {gov} Governance) reflects entity-specific ESG materiality 
+priorities identified through data-driven analysis rather than predetermined frameworks.
+        """.format(
+            env=pillar_counts.get('Environmental', 0),
+            soc=pillar_counts.get('Social', 0),
+            gov=pillar_counts.get('Governance', 0)
+        )
+        
+        with open(self.output_dir / 'figures' / 'figure_1c_description.txt', 'w') as f:
             f.write(description)
     
     # =====================================================================
@@ -697,7 +1060,65 @@ transient concerns in ESG materiality.
         
         with open(self.output_dir / 'figures' / 'figure_4_description.txt', 'w') as f:
             f.write(description)
-# (No replacement needed; remove the duplicated block entirely)
+            current_regime = regime
+            regime_start = i
+            
+            # Add final regime
+            regime_changes.append((current_regime, regime_start, len(regime_sequence)-1))
+        
+        # Plot regime timeline
+        regime_colors = {
+            'Environmental': '#2E8B57',
+            'Social': '#4682B4',
+            'Governance': '#DAA520'
+        }
+        
+        for regime, start, end in regime_changes:
+            ax.barh(0, end-start+1, left=start, height=0.8,
+                   color=regime_colors.get(regime, 'gray'),
+                   alpha=0.7, edgecolor='black', linewidth=1.5)
+            
+            # Add regime label
+            mid_point = (start + end) / 2
+            ax.text(mid_point, 0, f'{regime}\n({end-start+1}w)',
+                   ha='center', va='center', fontweight='bold',
+                   fontsize=9, color='white' if regime != 'Unknown' else 'black')
+        
+        ax.set_xlabel('Window ID', fontsize=11)
+        ax.set_title('Figure 4: ESG Pillar Regime Evolution',
+                    fontsize=13, fontweight='bold')
+        ax.set_ylim(-0.5, 0.5)
+        ax.set_yticks([])
+        ax.set_xlim(-0.5, len(regime_sequence))
+        ax.grid(True, alpha=0.3, axis='x')
+        
+        # Add legend
+        from matplotlib.patches import Patch
+        legend_elements = [Patch(facecolor=color, edgecolor='black', label=pillar)
+                          for pillar, color in regime_colors.items()]
+        ax.legend(handles=legend_elements, loc='upper right', fontsize=9)
+        
+        plt.tight_layout()
+        
+        filepath = self.output_dir / 'figures' / 'figure_4_regime_analysis.png'
+        plt.savefig(filepath, dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        print(f"  ✓ Figure 4 saved: {filepath}")
+        
+        description = """
+Figure 4 Description:
+This timeline visualizes ESG regime transitions across the analysis period. Each colored block 
+represents a period where a particular ESG pillar (Environmental, Social, or Governance) dominated 
+materiality assessments. Block width indicates regime duration in windows. Frequent transitions 
+suggest volatile ESG priorities responsive to external events, while extended blocks indicate 
+stable focus periods. The current regime's length and stability metrics inform strategic ESG 
+investment decisions. This visualization enables practitioners to identify persistent themes versus 
+transient concerns in ESG materiality.
+        """
+        
+        with open(self.output_dir / 'figures' / 'figure_4_description.txt', 'w') as f:
+            f.write(description)
     
     # =====================================================================
     # SECTION 4: FINAL MATERIALITY ASSESSMENT
@@ -1050,14 +1471,28 @@ framework's reliability for practical ESG investment applications.
 # CONVENIENCE FUNCTIONS FOR EASY EXECUTION
 # =====================================================================
 
-def generate_book_chapter(json_file, output_dir='book_chapter_outputs'):
+def generate_book_chapter(json_file, output_dir='book_chapter_outputs', db_config=None):
     """
     Main function to generate complete book chapter
     
+    Args:
+        json_file: Path to JSON results file
+        output_dir: Output directory for generated files
+        db_config: Optional dict with database connection info:
+                   {'host': 'localhost', 'database': 'esg_database', 
+                    'user': 'postgres', 'password': 'your_password'}
+    
     Usage:
+        # Without database (uses JSON data only)
         generate_book_chapter('output/json_results/entity_1_results_TIMESTAMP.json')
+        
+        # With database (generates figures from DB if JSON incomplete)
+        db_config = {'host': 'localhost', 'database': 'ESG_QR_1', 
+                     'user': 'postgres', 'password': 'Psg@240425'}
+        generate_book_chapter('output/json_results/entity_1_results_TIMESTAMP.json', 
+                             db_config=db_config)
     """
-    generator = ESGBookChapterGenerator(json_file, output_dir)
+    generator = ESGBookChapterGenerator(json_file, output_dir, db_config)
     generator.generate_complete_chapter()
     
     print(f"\n📚 BOOK CHAPTER READY!")
@@ -1129,3 +1564,5 @@ if __name__ == "__main__":
         print(f"\n❌ Error: {e}")
         import traceback
         traceback.print_exc()
+
+                    

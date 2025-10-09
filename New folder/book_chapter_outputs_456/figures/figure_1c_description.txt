@@ -1,0 +1,10 @@
+
+Figure 1c Description:
+This horizontal bar chart displays the top material ESG drivers identified through Framework 1's 
+two-stage selection process, ranked by composite importance scores. Colors denote ESG pillar 
+affiliation: Environmental (green), Social (blue), and Governance (orange). The composite score 
+integrates Mutual Information (35%), AUC (30%), and F1 score (35%), ensuring selected drivers 
+demonstrate both statistical significance and predictive performance. The pillar distribution 
+(0 Environmental, 4 Social, 2 Governance) reflects entity-specific ESG materiality 
+priorities identified through data-driven analysis rather than predetermined frameworks.
+        
