@@ -1,0 +1,3370 @@
+{
+  "entity_id": 456,
+  "timestamp": "2025-10-12T13:32:46.488104",
+  "config_used": {
+    "target_creation": {
+      "min_class_size": 15,
+      "base_multiplier": 0.75,
+      "min_class_proportion": 0.15,
+      "balance_quality_threshold": 0.6,
+      "signal_preservation_threshold": 0.3,
+      "fallback_percentiles": {
+        "3class": [
+          33,
+          67
+        ],
+        "5class": [
+          20,
+          40,
+          60,
+          80
+        ]
+      },
+      "skew_adjustment_factor": 0.03,
+      "use_dynamic_multiplier": true
+    },
+    "framework1": {
+      "use_binary_enhancement": true,
+      "target_features_stage1": 12,
+      "target_features_stage2": 6,
+      "mi_weight": 0.5,
+      "binary_auc_weight": 0.3,
+      "rf_weight": 0.2,
+      "cv_splits": 3
+    },
+    "framework2": {
+      "window_size": 39,
+      "step_size": 13,
+      "min_window_samples": 52,
+      "enable_individual_regime_tracking": true,
+      "enable_pillar_regime_detection": true,
+      "regime_min_length": 3
+    }
+  },
+  "status": "SUCCESS",
+  "data_quality": {
+    "entity_id": 456,
+    "total_rows": 274,
+    "date_range": [
+      "2020-01-06T00:00:00",
+      "2025-03-31T00:00:00"
+    ],
+    "pbs_features": 25,
+    "has_volume": true,
+    "missing_data_pct": {
+      "date": 0.0,
+      "close_price": 0.0,
+      "pbs_1": 0.0,
+      "pbs_2": 0.0,
+      "pbs_3": 0.0,
+      "pbs_4": 0.0,
+      "pbs_5": 0.0,
+      "pbs_6": 0.0,
+      "pbs_7": 0.0,
+      "pbs_8": 0.0,
+      "pbs_9": 0.0,
+      "pbs_10": 0.0,
+      "pbs_11": 0.0,
+      "pbs_12": 0.0,
+      "pbs_13": 0.0,
+      "pbs_14": 0.0,
+      "pbs_15": 0.0,
+      "pbs_18": 0.0,
+      "pbs_19": 0.0,
+      "pbs_20": 0.0,
+      "pbs_21": 0.0,
+      "pbs_22": 0.0,
+      "pbs_23": 0.0,
+      "pbs_24": 0.0,
+      "pbs_25": 0.0,
+      "pbs_26": 0.0,
+      "pbs_27": 0.0,
+      "volume": 0.0
+    },
+    "price_stats": {
+      "min": 52.80669021606445,
+      "max": 234.3000030517578,
+      "mean": 129.68954783808576,
+      "std": 35.87156535529979
+    }
+  },
+  "framework1_results": {
+    "selected_drivers": [
+      {
+        "feature": "pbs_12",
+        "driver_number": 12,
+        "pillar": "Social",
+        "composite_score": 0.135720498395818,
+        "mi_score": 0.010263169846761455,
+        "auc_score": 0.6048331834648512,
+        "binary_classification_power": "True",
+        "rf_importance": 0.14361014084536552,
+        "rf_rank": 1,
+        "stage1_rank": 7,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "SELECTED"
+      },
+      {
+        "feature": "pbs_10",
+        "driver_number": 10,
+        "pillar": "Social",
+        "composite_score": 0.3312419496757207,
+        "mi_score": 0.04831783751215165,
+        "auc_score": 0.5832564018469564,
+        "binary_classification_power": "False",
+        "rf_importance": 0.11997105526852536,
+        "rf_rank": 2,
+        "stage1_rank": 4,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "SELECTED"
+      },
+      {
+        "feature": "pbs_8",
+        "driver_number": 8,
+        "pillar": "Social",
+        "composite_score": 0.32042209629858004,
+        "mi_score": 0.04667148100417173,
+        "auc_score": 0.5810418472446726,
+        "binary_classification_power": "False",
+        "rf_importance": 0.11355920808396829,
+        "rf_rank": 3,
+        "stage1_rank": 5,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "SELECTED"
+      },
+      {
+        "feature": "pbs_15",
+        "driver_number": 15,
+        "pillar": "Social",
+        "composite_score": 0.11437908629733531,
+        "mi_score": 0.014929549333447737,
+        "auc_score": 0.5417649071085715,
+        "binary_classification_power": "False",
+        "rf_importance": 0.10536559084113131,
+        "rf_rank": 4,
+        "stage1_rank": 8,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "SELECTED"
+      },
+      {
+        "feature": "pbs_19",
+        "driver_number": 19,
+        "pillar": "Governance",
+        "composite_score": 0.3319687319530725,
+        "mi_score": 0.05475174950999132,
+        "auc_score": 0.5365016401438498,
+        "binary_classification_power": "False",
+        "rf_importance": 0.09231200709342245,
+        "rf_rank": 5,
+        "stage1_rank": 10,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "SELECTED"
+      },
+      {
+        "feature": "pbs_24",
+        "driver_number": 24,
+        "pillar": "Governance",
+        "composite_score": 0.31423983788676996,
+        "mi_score": 0.04343005845630247,
+        "auc_score": 0.5968422200237508,
+        "binary_classification_power": "False",
+        "rf_importance": 0.09228471904317855,
+        "rf_rank": 6,
+        "stage1_rank": 11,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "SELECTED"
+      }
+    ],
+    "selected_features": [
+      "pbs_12",
+      "pbs_10",
+      "pbs_8",
+      "pbs_15",
+      "pbs_19",
+      "pbs_24"
+    ],
+    "selected_drivers_12": [
+      {
+        "feature": "pbs_3",
+        "driver_number": 3,
+        "pillar": "Environmental",
+        "composite_score": 0.6953905981103957,
+        "mi_score": 0.11234630936889396,
+        "auc_score": 0.593854130813861,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_2",
+        "driver_number": 2,
+        "pillar": "Environmental",
+        "composite_score": 0.19372588619020534,
+        "mi_score": 0.02843219747767282,
+        "auc_score": 0.5474041967980404,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_5",
+        "driver_number": 5,
+        "pillar": "Environmental",
+        "composite_score": 0.15855603959076353,
+        "mi_score": 0.02390568348242413,
+        "auc_score": 0.5340866702346778,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_10",
+        "driver_number": 10,
+        "pillar": "Social",
+        "composite_score": 0.3312419496757207,
+        "mi_score": 0.04831783751215165,
+        "auc_score": 0.5832564018469564,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_8",
+        "driver_number": 8,
+        "pillar": "Social",
+        "composite_score": 0.32042209629858004,
+        "mi_score": 0.04667148100417173,
+        "auc_score": 0.5810418472446726,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_18",
+        "driver_number": 18,
+        "pillar": "Social",
+        "composite_score": 0.1773475657223304,
+        "mi_score": 0.0201189296495831,
+        "auc_score": 0.5872304394600409,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_12",
+        "driver_number": 12,
+        "pillar": "Social",
+        "composite_score": 0.135720498395818,
+        "mi_score": 0.010263169846761455,
+        "auc_score": 0.6048331834648512,
+        "binary_classification_power": "True"
+      },
+      {
+        "feature": "pbs_15",
+        "driver_number": 15,
+        "pillar": "Social",
+        "composite_score": 0.11437908629733531,
+        "mi_score": 0.014929549333447737,
+        "auc_score": 0.5417649071085715,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_22",
+        "driver_number": 22,
+        "pillar": "Governance",
+        "composite_score": 0.4782186739891918,
+        "mi_score": 0.07748421433084467,
+        "auc_score": 0.5628825775937308,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_19",
+        "driver_number": 19,
+        "pillar": "Governance",
+        "composite_score": 0.3319687319530725,
+        "mi_score": 0.05475174950999132,
+        "auc_score": 0.5365016401438498,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_24",
+        "driver_number": 24,
+        "pillar": "Governance",
+        "composite_score": 0.31423983788676996,
+        "mi_score": 0.04343005845630247,
+        "auc_score": 0.5968422200237508,
+        "binary_classification_power": "False"
+      },
+      {
+        "feature": "pbs_23",
+        "driver_number": 23,
+        "pillar": "Governance",
+        "composite_score": 0.19493444836228627,
+        "mi_score": 0.03171502870259039,
+        "auc_score": 0.5246650784812285,
+        "binary_classification_power": "False"
+      }
+    ],
+    "cut_drivers": [
+      {
+        "feature": "pbs_22",
+        "driver_number": 22,
+        "pillar": "Governance",
+        "composite_score": 0.4782186739891918,
+        "mi_score": 0.07748421433084467,
+        "auc_score": 0.5628825775937308,
+        "binary_classification_power": "False",
+        "rf_importance": 0.08826227817732354,
+        "rf_rank": 7,
+        "stage1_rank": 9,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "ELIMINATED"
+      },
+      {
+        "feature": "pbs_3",
+        "driver_number": 3,
+        "pillar": "Environmental",
+        "composite_score": 0.6953905981103957,
+        "mi_score": 0.11234630936889396,
+        "auc_score": 0.593854130813861,
+        "binary_classification_power": "False",
+        "rf_importance": 0.08127453144069241,
+        "rf_rank": 8,
+        "stage1_rank": 1,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "ELIMINATED"
+      },
+      {
+        "feature": "pbs_23",
+        "driver_number": 23,
+        "pillar": "Governance",
+        "composite_score": 0.19493444836228627,
+        "mi_score": 0.03171502870259039,
+        "auc_score": 0.5246650784812285,
+        "binary_classification_power": "False",
+        "rf_importance": 0.0655696667548744,
+        "rf_rank": 9,
+        "stage1_rank": 12,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "ELIMINATED"
+      },
+      {
+        "feature": "pbs_2",
+        "driver_number": 2,
+        "pillar": "Environmental",
+        "composite_score": 0.19372588619020534,
+        "mi_score": 0.02843219747767282,
+        "auc_score": 0.5474041967980404,
+        "binary_classification_power": "False",
+        "rf_importance": 0.04129788841591698,
+        "rf_rank": 10,
+        "stage1_rank": 2,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "ELIMINATED"
+      },
+      {
+        "feature": "pbs_18",
+        "driver_number": 18,
+        "pillar": "Social",
+        "composite_score": 0.1773475657223304,
+        "mi_score": 0.0201189296495831,
+        "auc_score": 0.5872304394600409,
+        "binary_classification_power": "False",
+        "rf_importance": 0.03131082967617869,
+        "rf_rank": 11,
+        "stage1_rank": 6,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "ELIMINATED"
+      },
+      {
+        "feature": "pbs_5",
+        "driver_number": 5,
+        "pillar": "Environmental",
+        "composite_score": 0.15855603959076353,
+        "mi_score": 0.02390568348242413,
+        "auc_score": 0.5340866702346778,
+        "binary_classification_power": "False",
+        "rf_importance": 0.025182084359422496,
+        "rf_rank": 12,
+        "stage1_rank": 3,
+        "selection_stage": "RF_evaluated",
+        "final_selection_status": "ELIMINATED"
+      }
+    ],
+    "pillar_distribution": {
+      "Social": 4,
+      "Governance": 2
+    },
+    "importance_results": {
+      "MI": [
+        {
+          "feature": "pbs_1",
+          "score": 0.0
+        },
+        {
+          "feature": "pbs_2",
+          "score": 0.02843219747767282
+        },
+        {
+          "feature": "pbs_3",
+          "score": 0.11234630936889396
+        },
+        {
+          "feature": "pbs_4",
+          "score": 0.001790478431205648
+        },
+        {
+          "feature": "pbs_5",
+          "score": 0.02390568348242413
+        },
+        {
+          "feature": "pbs_6",
+          "score": 0.00930317879261596
+        },
+        {
+          "feature": "pbs_7",
+          "score": 0.0017381520435289695
+        },
+        {
+          "feature": "pbs_8",
+          "score": 0.04667148100417173
+        },
+        {
+          "feature": "pbs_9",
+          "score": 0.0053112579262945365
+        },
+        {
+          "feature": "pbs_10",
+          "score": 0.04831783751215165
+        },
+        {
+          "feature": "pbs_11",
+          "score": 0.015790112527881428
+        },
+        {
+          "feature": "pbs_12",
+          "score": 0.010263169846761455
+        },
+        {
+          "feature": "pbs_13",
+          "score": 0.0
+        },
+        {
+          "feature": "pbs_14",
+          "score": 0.01128377648564712
+        },
+        {
+          "feature": "pbs_15",
+          "score": 0.014929549333447737
+        },
+        {
+          "feature": "pbs_18",
+          "score": 0.0201189296495831
+        },
+        {
+          "feature": "pbs_19",
+          "score": 0.05475174950999132
+        },
+        {
+          "feature": "pbs_20",
+          "score": 0.02802889446529348
+        },
+        {
+          "feature": "pbs_21",
+          "score": 0.006841093007488548
+        },
+        {
+          "feature": "pbs_22",
+          "score": 0.07748421433084467
+        },
+        {
+          "feature": "pbs_23",
+          "score": 0.03171502870259039
+        },
+        {
+          "feature": "pbs_24",
+          "score": 0.04343005845630247
+        },
+        {
+          "feature": "pbs_25",
+          "score": 0.0
+        },
+        {
+          "feature": "pbs_26",
+          "score": 0.0
+        },
+        {
+          "feature": "pbs_27",
+          "score": 0.0
+        }
+      ],
+      "AUC": [
+        {
+          "feature": "pbs_1",
+          "score": 0.521304300294391
+        },
+        {
+          "feature": "pbs_2",
+          "score": 0.5474041967980404
+        },
+        {
+          "feature": "pbs_3",
+          "score": 0.593854130813861
+        },
+        {
+          "feature": "pbs_4",
+          "score": 0.5207176357661282
+        },
+        {
+          "feature": "pbs_5",
+          "score": 0.5340866702346778
+        },
+        {
+          "feature": "pbs_6",
+          "score": 0.5789323657655937
+        },
+        {
+          "feature": "pbs_7",
+          "score": 0.5387472947087115
+        },
+        {
+          "feature": "pbs_8",
+          "score": 0.5810418472446726
+        },
+        {
+          "feature": "pbs_9",
+          "score": 0.5306675514613528
+        },
+        {
+          "feature": "pbs_10",
+          "score": 0.5832564018469564
+        },
+        {
+          "feature": "pbs_11",
+          "score": 0.5342148243054843
+        },
+        {
+          "feature": "pbs_12",
+          "score": 0.6048331834648512
+        },
+        {
+          "feature": "pbs_13",
+          "score": 0.546103854953739
+        },
+        {
+          "feature": "pbs_14",
+          "score": 0.5434126344836866
+        },
+        {
+          "feature": "pbs_15",
+          "score": 0.5417649071085715
+        },
+        {
+          "feature": "pbs_18",
+          "score": 0.5872304394600409
+        },
+        {
+          "feature": "pbs_19",
+          "score": 0.5365016401438498
+        },
+        {
+          "feature": "pbs_20",
+          "score": 0.5366335634520328
+        },
+        {
+          "feature": "pbs_21",
+          "score": 0.5640367751426153
+        },
+        {
+          "feature": "pbs_22",
+          "score": 0.5628825775937308
+        },
+        {
+          "feature": "pbs_23",
+          "score": 0.5246650784812285
+        },
+        {
+          "feature": "pbs_24",
+          "score": 0.5968422200237508
+        },
+        {
+          "feature": "pbs_25",
+          "score": 0.5282762932088253
+        },
+        {
+          "feature": "pbs_26",
+          "score": 0.5335891459178409
+        },
+        {
+          "feature": "pbs_27",
+          "score": 0.5227946056957231
+        }
+      ]
+    },
+    "target_metadata": {
+      "binary": {
+        "threshold": 0.015026342626586048,
+        "method_used": "research_enhanced_binary",
+        "balance_quality": 0.7912087912087912,
+        "positive_rate": 0.3956043956043956,
+        "class_distribution": {
+          "0": 165,
+          "1": 108
+        },
+        "skewness": -5.446090563722806,
+        "base_multiplier": 0.5,
+        "median_return": 0.005690885975932079,
+        "mad": 0.023338641626634925
+      },
+      "three_class": {
+        "class_distribution": {
+          "1": 64,
+          "0": 98,
+          "2": 111
+        },
+        "class_proportions": [
+          0.358974358974359,
+          0.23443223443223443,
+          0.4065934065934066
+        ],
+        "balance_quality": 0.7822437516820242,
+        "signal_preservation": 0.7655677655677655,
+        "thresholds": {
+          "lower": -0.0066785940861844315,
+          "upper": 0.014326183377787002
+        },
+        "statistics": {
+          "median": 0.005690885975932079,
+          "mad": 0.023338641626634925,
+          "skewness": -5.446090563722806,
+          "method_used": "three_class_skewness_aware_mad"
+        },
+        "parameters": {
+          "base_multiplier": 0.45,
+          "skew_adjustment_applied": "True",
+          "dynamic_multiplier_used": true
+        },
+        "quality_summary": {
+          "overall_quality": "good",
+          "primary_concerns": [
+            "skewness_manageable"
+          ]
+        }
+      },
+      "quality_gates": {
+        "sufficient_samples": true,
+        "balance_acceptable": "True",
+        "signal_preserved": true,
+        "all_classes_present": true,
+        "skewness_manageable": "False",
+        "mad_reliable": "True"
+      }
+    }
+  },
+  "framework2_results": {
+    "walkforward_results": [
+      {
+        "window_id": 1,
+        "period_start": "2020-01-06T00:00:00",
+        "period_end": "2020-12-28T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 31,
+            "1": 20
+          },
+          "three_class": {
+            "1": 16,
+            "0": 15,
+            "2": 20
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.10267141163705751,
+            "correlation": 0.17039683423018698,
+            "binary_auc_score": 0.5887096774193549,
+            "three_class_f1_score": 0.20460358056265984,
+            "combined_score": 0.4347161126462507,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.18419203203877005,
+            "binary_auc_score": 0.6088709677419355,
+            "three_class_f1_score": 0.3408461210571185,
+            "combined_score": 0.19998353389575363,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.32393165002127017,
+            "binary_auc_score": 0.6911290322580645,
+            "three_class_f1_score": 0.18226058539357773,
+            "combined_score": 0.1846653327875269,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.13361178533775173,
+            "binary_auc_score": 0.5741935483870968,
+            "three_class_f1_score": 0.2551990493166964,
+            "combined_score": 0.14585698318711454,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.07637963425717267,
+            "binary_auc_score": 0.5435483870967742,
+            "three_class_f1_score": 0.27225179143337713,
+            "combined_score": 0.1344938918345966,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.0205064850011854,
+            "binary_auc_score": 0.5112903225806451,
+            "three_class_f1_score": 0.21288515406162462,
+            "combined_score": 0.09182454716503168,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.22876263039092887,
+          "Governance": 0.1382449399762793
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 8,
+        "top_score": 0.4347161126462507,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.019457737556223886,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.7843137254901961,
+            "positive_rate": 0.39215686274509803,
+            "class_distribution": {
+              "0": 31,
+              "1": 20
+            },
+            "skewness": -6.3325765245186645,
+            "base_multiplier": 0.5,
+            "median_return": 0.005487186754893235,
+            "mad": 0.034926377003326625
+          },
+          "three_class": {
+            "class_distribution": {
+              "1": 16,
+              "0": 15,
+              "2": 20
+            },
+            "class_proportions": [
+              0.29411764705882354,
+              0.3137254901960784,
+              0.39215686274509803
+            ],
+            "balance_quality": 0.8729266529723949,
+            "signal_preservation": 0.6862745098039216,
+            "thresholds": {
+              "lower": -0.013023793056869876,
+              "upper": 0.018409946246124086
+            },
+            "statistics": {
+              "median": 0.005487186754893235,
+              "mad": 0.034926377003326625,
+              "skewness": -6.3325765245186645,
+              "method_used": "three_class_skewness_aware_mad"
+            },
+            "parameters": {
+              "base_multiplier": 0.45,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "good",
+              "primary_concerns": [
+                "skewness_manageable"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "window_id": 2,
+        "period_start": "2020-04-06T00:00:00",
+        "period_end": "2021-03-29T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 33,
+            "1": 18
+          },
+          "three_class": {
+            "0": 17,
+            "2": 17,
+            "1": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.14811825386044286,
+            "correlation": 0.38515961916419034,
+            "binary_auc_score": 0.7323232323232323,
+            "three_class_f1_score": 0.2400547195622435,
+            "combined_score": 0.5274655943396389,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.1501076255206395,
+            "correlation": 0.0014838601505071714,
+            "binary_auc_score": 0.5008417508417509,
+            "three_class_f1_score": 0.15920398009950248,
+            "combined_score": 0.3641766604682018,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.07387138688961264,
+            "binary_auc_score": 0.5446127946127945,
+            "three_class_f1_score": 0.4101231190150479,
+            "combined_score": 0.19004921425689708,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.0363840909493538,
+            "correlation": 0.07651647121824709,
+            "binary_auc_score": 0.5412457912457913,
+            "three_class_f1_score": 0.1616161616161616,
+            "combined_score": 0.16181119174091219,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.1479949806778231,
+            "binary_auc_score": 0.5824915824915826,
+            "three_class_f1_score": 0.18903318903318903,
+            "combined_score": 0.12425881589295809,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.044895043195893554,
+            "binary_auc_score": 0.5252525252525253,
+            "three_class_f1_score": 0.15920398009950248,
+            "combined_score": 0.07855260682585832,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Governance": 0.3030091005827486,
+          "Social": 0.21007397058974228
+        },
+        "dominant_pillar": "Governance",
+        "top_driver": 24,
+        "top_score": 0.5274655943396389,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.03252720895351266,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.7058823529411765,
+            "positive_rate": 0.35294117647058826,
+            "class_distribution": {
+              "0": 33,
+              "1": 18
+            },
+            "skewness": 0.36478101185864653,
+            "base_multiplier": 0.75,
+            "median_return": 0.008868144539391061,
+            "mad": 0.0315454192188288
+          },
+          "three_class": {
+            "class_distribution": {
+              "0": 17,
+              "2": 17,
+              "1": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.005439979437700434,
+              "upper": 0.03865952355830541
+            },
+            "statistics": {
+              "median": 0.008868144539391061,
+              "mad": 0.0315454192188288,
+              "skewness": 0.36478101185864653,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.75,
+              "skew_adjustment_applied": "False",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 3,
+        "period_start": "2020-07-06T00:00:00",
+        "period_end": "2021-06-28T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "1": 16,
+            "0": 35
+          },
+          "three_class": {
+            "2": 17,
+            "1": 17,
+            "0": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.09833590113691337,
+            "correlation": 0.12075566567682187,
+            "binary_auc_score": 0.5678571428571428,
+            "three_class_f1_score": 0.16666666666666666,
+            "combined_score": 0.40663302137907914,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.04375683802798358,
+            "correlation": 0.14070515914911594,
+            "binary_auc_score": 0.5839285714285714,
+            "three_class_f1_score": 0.29190563223461696,
+            "combined_score": 0.29925374870744376,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.008788048647429214,
+            "correlation": 0.06461012226688842,
+            "binary_auc_score": 0.5401785714285714,
+            "three_class_f1_score": 0.35678978568171454,
+            "combined_score": 0.19284600186969192,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.10623092566967288,
+            "binary_auc_score": 0.5660714285714286,
+            "three_class_f1_score": 0.32578203374373005,
+            "combined_score": 0.16866007406668995,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.008202419460452415,
+            "correlation": 0.08143872636629085,
+            "binary_auc_score": 0.5491071428571428,
+            "three_class_f1_score": 0.18078324225865208,
+            "combined_score": 0.1259624817579542,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.00953281352740665,
+            "binary_auc_score": 0.505357142857143,
+            "three_class_f1_score": 0.1691542288557214,
+            "combined_score": 0.07081690364723037,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Governance": 0.28764654772288456,
+          "Social": 0.17221978399558005
+        },
+        "dominant_pillar": "Governance",
+        "top_driver": 19,
+        "top_score": 0.40663302137907914,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.02392047259207302,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.6274509803921569,
+            "positive_rate": 0.3137254901960784,
+            "class_distribution": {
+              "1": 16,
+              "0": 35
+            },
+            "skewness": 0.7597744698531461,
+            "base_multiplier": 0.75,
+            "median_return": 0.004434525796211159,
+            "mad": 0.02598126239448248
+          },
+          "three_class": {
+            "class_distribution": {
+              "2": 17,
+              "1": 17,
+              "0": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.006235660601654009,
+              "upper": 0.02163636875079897
+            },
+            "statistics": {
+              "median": 0.004434525796211159,
+              "mad": 0.02598126239448248,
+              "skewness": 0.7597744698531461,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.7,
+              "skew_adjustment_applied": "False",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 4,
+        "period_start": "2020-10-05T00:00:00",
+        "period_end": "2021-09-27T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 35,
+            "1": 16
+          },
+          "three_class": {
+            "1": 17,
+            "0": 17,
+            "2": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.04076679974382724,
+            "correlation": 0.0,
+            "binary_auc_score": 0.5,
+            "three_class_f1_score": 0.3793524851801186,
+            "combined_score": 0.45174099407204743,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.0311273378984831,
+            "correlation": 0.05436320925898112,
+            "binary_auc_score": 0.5258928571428572,
+            "three_class_f1_score": 0.16666666666666666,
+            "combined_score": 0.3113951368058859,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.14928400545843576,
+            "binary_auc_score": 0.5928571428571429,
+            "three_class_f1_score": 0.407405380756954,
+            "combined_score": 0.2168549240042748,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.059974124597011375,
+            "binary_auc_score": 0.5366071428571428,
+            "three_class_f1_score": 0.32870257037943695,
+            "combined_score": 0.15278330581019678,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.03571793356534617,
+            "binary_auc_score": 0.5214285714285715,
+            "three_class_f1_score": 0.3412892696858425,
+            "combined_score": 0.14901589026689005,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.014626804327602579,
+            "binary_auc_score": 0.5089285714285714,
+            "three_class_f1_score": 0.22372742200328408,
+            "combined_score": 0.09468659473197946,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.21205669622027845,
+          "Governance": 0.26412503040508034
+        },
+        "dominant_pillar": "Governance",
+        "top_driver": 12,
+        "top_score": 0.45174099407204743,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.023441178743217127,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.6274509803921569,
+            "positive_rate": 0.3137254901960784,
+            "class_distribution": {
+              "0": 35,
+              "1": 16
+            },
+            "skewness": 0.2548450728105837,
+            "base_multiplier": 0.75,
+            "median_return": 0.004434525796211159,
+            "mad": 0.025342203929341285
+          },
+          "three_class": {
+            "class_distribution": {
+              "1": 17,
+              "0": 17,
+              "2": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.009068709829667527,
+              "upper": 0.020351460439750068
+            },
+            "statistics": {
+              "median": 0.004434525796211159,
+              "mad": 0.025342203929341285,
+              "skewness": 0.2548450728105837,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.75,
+              "skew_adjustment_applied": "False",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 5,
+        "period_start": "2021-01-04T00:00:00",
+        "period_end": "2021-12-27T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 35,
+            "1": 16
+          },
+          "three_class": {
+            "0": 19,
+            "2": 16,
+            "1": 16
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.12850184482043203,
+            "correlation": 0.18712221277743193,
+            "binary_auc_score": 0.6160714285714286,
+            "three_class_f1_score": 0.30687830687830686,
+            "combined_score": 0.4901431476759086,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.11461997303471749,
+            "correlation": 0.017447955889762154,
+            "binary_auc_score": 0.5107142857142857,
+            "three_class_f1_score": 0.23751446352065547,
+            "combined_score": 0.3688267521477139,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.13492977416435542,
+            "binary_auc_score": 0.5839285714285715,
+            "three_class_f1_score": 0.4606286959228136,
+            "combined_score": 0.23296225279162897,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.007205212029990804,
+            "correlation": 0.07946412613130495,
+            "binary_auc_score": 0.5491071428571429,
+            "three_class_f1_score": 0.4220354808590102,
+            "combined_score": 0.21416223526771766,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.07646418482190036,
+            "binary_auc_score": 0.5473214285714286,
+            "three_class_f1_score": 0.31263616557734203,
+            "combined_score": 0.15253838975774617,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.0,
+            "binary_auc_score": 0.5,
+            "three_class_f1_score": 0.1498390400936494,
+            "combined_score": 0.05993561603745976,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.30641763121227156,
+          "Governance": 0.14644893441454437
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 12,
+        "top_score": 0.4901431476759086,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.020258347816376664,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.6274509803921569,
+            "positive_rate": 0.3137254901960784,
+            "class_distribution": {
+              "0": 35,
+              "1": 16
+            },
+            "skewness": -1.1106222795936105,
+            "base_multiplier": 0.6,
+            "median_return": 0.008121112282911847,
+            "mad": 0.020228725889108033
+          },
+          "three_class": {
+            "class_distribution": {
+              "0": 19,
+              "2": 16,
+              "1": 16
+            },
+            "class_proportions": [
+              0.37254901960784315,
+              0.3137254901960784,
+              0.3137254901960784
+            ],
+            "balance_quality": 0.9168109669192297,
+            "signal_preservation": 0.6862745098039216,
+            "thresholds": {
+              "lower": -0.004016123250552972,
+              "upper": 0.020258347816376664
+            },
+            "statistics": {
+              "median": 0.008121112282911847,
+              "mad": 0.020228725889108033,
+              "skewness": -1.1106222795936105,
+              "method_used": "three_class_skewness_aware_mad"
+            },
+            "parameters": {
+              "base_multiplier": 0.6,
+              "skew_adjustment_applied": "False",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 6,
+        "period_start": "2021-04-05T00:00:00",
+        "period_end": "2022-03-28T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "1": 20,
+            "0": 31
+          },
+          "three_class": {
+            "2": 17,
+            "0": 17,
+            "1": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.17304895114362595,
+            "correlation": 0.041194363842073055,
+            "binary_auc_score": 0.5241935483870969,
+            "three_class_f1_score": 0.31018468902940016,
+            "combined_score": 0.43823036799741216,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.0642694248900515,
+            "correlation": 0.1757811828226469,
+            "binary_auc_score": 0.5854838709677419,
+            "three_class_f1_score": 0.16666666666666666,
+            "combined_score": 0.22961600471180937,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.024163316401589974,
+            "correlation": 0.26637484471554856,
+            "binary_auc_score": 0.657258064516129,
+            "three_class_f1_score": 0.2165800273597811,
+            "combined_score": 0.22046963725465746,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.030207556549363357,
+            "correlation": 0.14467725035144624,
+            "binary_auc_score": 0.5854838709677419,
+            "three_class_f1_score": 0.2906703146374829,
+            "combined_score": 0.21861215206538737,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.1473336215185681,
+            "binary_auc_score": 0.5870967741935483,
+            "three_class_f1_score": 0.37524851801185594,
+            "combined_score": 0.20101447537744493,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.017775695308086537,
+            "correlation": 0.10669768681685865,
+            "binary_auc_score": 0.5629032258064517,
+            "three_class_f1_score": 0.22912904696762426,
+            "combined_score": 0.15925430160857373,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.25914161473150765,
+          "Governance": 0.21531524004462715
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 15,
+        "top_score": 0.43823036799741216,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.011438105216036547,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.7843137254901961,
+            "positive_rate": 0.39215686274509803,
+            "class_distribution": {
+              "1": 20,
+              "0": 31
+            },
+            "skewness": -1.7438961196521496,
+            "base_multiplier": 0.55,
+            "median_return": -0.000290361115136178,
+            "mad": 0.023566132634285197
+          },
+          "three_class": {
+            "class_distribution": {
+              "2": 17,
+              "0": 17,
+              "1": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.017040116007707287,
+              "upper": 0.015302229810171205
+            },
+            "statistics": {
+              "median": -0.000290361115136178,
+              "mad": 0.023566132634285197,
+              "skewness": -1.7438961196521496,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.55,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 7,
+        "period_start": "2021-07-05T00:00:00",
+        "period_end": "2022-06-27T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 29,
+            "1": 22
+          },
+          "three_class": {
+            "0": 17,
+            "2": 17,
+            "1": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.1248371564125268,
+            "correlation": 0.2664379442811809,
+            "binary_auc_score": 0.627742946708464,
+            "three_class_f1_score": 0.16666666666666666,
+            "combined_score": 0.44386003723495765,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.0931580007509456,
+            "correlation": 0.26093500907494116,
+            "binary_auc_score": 0.6504702194357367,
+            "three_class_f1_score": 0.19106247150022798,
+            "combined_score": 0.38857769803176945,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.09139950559871513,
+            "correlation": 0.23132968536084828,
+            "binary_auc_score": 0.6347962382445141,
+            "three_class_f1_score": 0.15595075239398085,
+            "combined_score": 0.360989859965153,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.07298923543557634,
+            "correlation": 0.3160680595609219,
+            "binary_auc_score": 0.6841692789968652,
+            "three_class_f1_score": 0.16711354309165527,
+            "combined_score": 0.35013613035964763,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.18289942842458634,
+            "binary_auc_score": 0.6065830721003135,
+            "three_class_f1_score": 0.3948563611491109,
+            "combined_score": 0.2203790519310304,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.052793033013210394,
+            "binary_auc_score": 0.530564263322884,
+            "three_class_f1_score": 0.3085881424059719,
+            "combined_score": 0.14135704027449125,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Governance": 0.33211954458299403,
+          "Social": 0.31026518215776533
+        },
+        "dominant_pillar": "Governance",
+        "top_driver": 19,
+        "top_score": 0.44386003723495765,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.005493732042586931,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.8627450980392157,
+            "positive_rate": 0.43137254901960786,
+            "class_distribution": {
+              "0": 29,
+              "1": 22
+            },
+            "skewness": -3.1046191036164346,
+            "base_multiplier": 0.5,
+            "median_return": -0.0038980205757587457,
+            "mad": 0.023083418573493983
+          },
+          "three_class": {
+            "class_distribution": {
+              "0": 17,
+              "2": 17,
+              "1": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.017090481432005353,
+              "upper": 0.014227687981871719
+            },
+            "statistics": {
+              "median": -0.0038980205757587457,
+              "mad": 0.023083418573493983,
+              "skewness": -3.1046191036164346,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.45,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "good",
+              "primary_concerns": [
+                "skewness_manageable"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "window_id": 8,
+        "period_start": "2021-10-04T00:00:00",
+        "period_end": "2022-09-26T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "1": 18,
+            "0": 33
+          },
+          "three_class": {
+            "2": 18,
+            "1": 17,
+            "0": 16
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.04652285409303447,
+            "correlation": 0.157531454758311,
+            "binary_auc_score": 0.5951178451178452,
+            "three_class_f1_score": 0.2713250148544266,
+            "combined_score": 0.46396550123860875,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.02003746980169474,
+            "correlation": 0.2741377061284805,
+            "binary_auc_score": 0.6624579124579124,
+            "three_class_f1_score": 0.26070112893642305,
+            "combined_score": 0.32842678669848535,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.03183967371114127,
+            "correlation": 0.1354689626373245,
+            "binary_auc_score": 0.5698653198653199,
+            "three_class_f1_score": 0.18414322250639384,
+            "combined_score": 0.3206797367362038,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.158957924844541,
+            "binary_auc_score": 0.595959595959596,
+            "three_class_f1_score": 0.318716577540107,
+            "combined_score": 0.1834143252380679,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.0629550338722911,
+            "binary_auc_score": 0.5378787878787878,
+            "three_class_f1_score": 0.3135115864527629,
+            "combined_score": 0.14749178021411363,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.002092960767220653,
+            "correlation": 0.07806691846451454,
+            "binary_auc_score": 0.5471380471380471,
+            "three_class_f1_score": 0.253048128342246,
+            "combined_score": 0.14218796026074343,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.2705180071029878,
+          "Governance": 0.2520470309871359
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 10,
+        "top_score": 0.46396550123860875,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.01153614496760638,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.7058823529411765,
+            "positive_rate": 0.35294117647058826,
+            "class_distribution": {
+              "1": 18,
+              "0": 33
+            },
+            "skewness": -1.54370513703655,
+            "base_multiplier": 0.55,
+            "median_return": -0.003411501281535284,
+            "mad": 0.02967634953829929
+          },
+          "three_class": {
+            "class_distribution": {
+              "2": 18,
+              "1": 17,
+              "0": 16
+            },
+            "class_proportions": [
+              0.3137254901960784,
+              0.3333333333333333,
+              0.35294117647058826
+            ],
+            "balance_quality": 0.9519707893571926,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.020878781858369017,
+              "upper": 0.011765202633760208
+            },
+            "statistics": {
+              "median": -0.003411501281535284,
+              "mad": 0.02967634953829929,
+              "skewness": -1.54370513703655,
+              "method_used": "three_class_skewness_aware_mad"
+            },
+            "parameters": {
+              "base_multiplier": 0.55,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 9,
+        "period_start": "2022-01-03T00:00:00",
+        "period_end": "2022-12-26T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 32,
+            "1": 19
+          },
+          "three_class": {
+            "0": 16,
+            "1": 16,
+            "2": 19
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.13017838701327356,
+            "correlation": 0.17365973979587457,
+            "binary_auc_score": 0.6036184210526316,
+            "three_class_f1_score": 0.22055852644087937,
+            "combined_score": 0.4487156080924613,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.004429909989983383,
+            "correlation": 0.11577053815941611,
+            "binary_auc_score": 0.569078947368421,
+            "three_class_f1_score": 0.3748068924539513,
+            "combined_score": 0.20045961810342494,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.1965350967331762,
+            "binary_auc_score": 0.6151315789473684,
+            "three_class_f1_score": 0.27981778570013865,
+            "combined_score": 0.17931965859039847,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.31144399651871585,
+            "binary_auc_score": 0.6529605263157894,
+            "three_class_f1_score": 0.2022408963585434,
+            "combined_score": 0.17294882152724786,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.11574433090652585,
+            "binary_auc_score": 0.5690789473684211,
+            "three_class_f1_score": 0.3084175084175084,
+            "combined_score": 0.16369369359654024,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.10647317538821582,
+            "binary_auc_score": 0.5633223684210527,
+            "three_class_f1_score": 0.2677757971875619,
+            "combined_score": 0.14409516185496188,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.23395603053359046,
+          "Governance": 0.18670421981533641
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 10,
+        "top_score": 0.4487156080924613,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.013223351722897507,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.7450980392156863,
+            "positive_rate": 0.37254901960784315,
+            "class_distribution": {
+              "0": 32,
+              "1": 19
+            },
+            "skewness": -2.0775487389426033,
+            "base_multiplier": 0.5,
+            "median_return": 0.0009209875585463738,
+            "mad": 0.02810854004402063
+          },
+          "three_class": {
+            "class_distribution": {
+              "0": 16,
+              "1": 16,
+              "2": 19
+            },
+            "class_proportions": [
+              0.3137254901960784,
+              0.3137254901960784,
+              0.37254901960784315
+            ],
+            "balance_quality": 0.9168109669192297,
+            "signal_preservation": 0.6862745098039216,
+            "thresholds": {
+              "lower": -0.01459320401151326,
+              "upper": 0.013515336032507371
+            },
+            "statistics": {
+              "median": 0.0009209875585463738,
+              "mad": 0.02810854004402063,
+              "skewness": -2.0775487389426033,
+              "method_used": "three_class_skewness_aware_mad"
+            },
+            "parameters": {
+              "base_multiplier": 0.5,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 10,
+        "period_start": "2022-04-04T00:00:00",
+        "period_end": "2023-03-27T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 32,
+            "1": 19
+          },
+          "three_class": {
+            "0": 17,
+            "1": 17,
+            "2": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.09375779234053883,
+            "correlation": 0.02755879781689151,
+            "binary_auc_score": 0.5164473684210527,
+            "three_class_f1_score": 0.33848322220415245,
+            "combined_score": 0.44499491298303184,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.04806772322122188,
+            "correlation": 0.19239909020443352,
+            "binary_auc_score": 0.611842105263158,
+            "three_class_f1_score": 0.2041343669250646,
+            "combined_score": 0.30099868429865084,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.01136591142152188,
+            "correlation": 0.23302199031200316,
+            "binary_auc_score": 0.609375,
+            "three_class_f1_score": 0.1691542288557214,
+            "combined_score": 0.17036818476929227,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.04410306215596805,
+            "binary_auc_score": 0.5263157894736842,
+            "three_class_f1_score": 0.3834564523483812,
+            "combined_score": 0.168745628783993,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.0014494006809355753,
+            "correlation": 0.03031399142789963,
+            "binary_auc_score": 0.518092105263158,
+            "three_class_f1_score": 0.3006839945280438,
+            "combined_score": 0.13547304671572385,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.05650832802881632,
+            "binary_auc_score": 0.533717105263158,
+            "three_class_f1_score": 0.23618787049703602,
+            "combined_score": 0.11415911723183422,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.2489064403073102,
+          "Governance": 0.16955690677664265
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 10,
+        "top_score": 0.44499491298303184,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.01796566632000842,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.7450980392156863,
+            "positive_rate": 0.37254901960784315,
+            "class_distribution": {
+              "0": 32,
+              "1": 19
+            },
+            "skewness": -8.066242486231653,
+            "base_multiplier": 0.5,
+            "median_return": 0.010306619209551149,
+            "mad": 0.019147617776143183
+          },
+          "three_class": {
+            "class_distribution": {
+              "0": 17,
+              "1": 17,
+              "2": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.0036121612505775717,
+              "upper": 0.02148260473152018
+            },
+            "statistics": {
+              "median": 0.010306619209551149,
+              "mad": 0.019147617776143183,
+              "skewness": -8.066242486231653,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.45,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "good",
+              "primary_concerns": [
+                "skewness_manageable"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "window_id": 11,
+        "period_start": "2022-07-04T00:00:00",
+        "period_end": "2023-06-26T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 31,
+            "1": 20
+          },
+          "three_class": {
+            "1": 17,
+            "2": 17,
+            "0": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.16149919915269773,
+            "correlation": 0.11737433971751843,
+            "binary_auc_score": 0.5693548387096774,
+            "three_class_f1_score": 0.39051527587779294,
+            "combined_score": 0.49092909289295267,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.1646960335983938,
+            "correlation": 0.08731671507449652,
+            "binary_auc_score": 0.5516129032258064,
+            "three_class_f1_score": 0.39347013223894206,
+            "combined_score": 0.48756034026220485,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.08319254969552903,
+            "correlation": 0.2600905664339044,
+            "binary_auc_score": 0.617741935483871,
+            "three_class_f1_score": 0.1691542288557214,
+            "combined_score": 0.29107553593990193,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.19623662616761353,
+            "binary_auc_score": 0.614516129032258,
+            "three_class_f1_score": 0.22478796169630644,
+            "combined_score": 0.15698508050303228,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.11325424256842118,
+            "binary_auc_score": 0.5669354838709677,
+            "three_class_f1_score": 0.26285453716370266,
+            "combined_score": 0.144272268929386,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.09276771238949326,
+            "binary_auc_score": 0.5548387096774193,
+            "three_class_f1_score": 0.2206839945280438,
+            "combined_score": 0.12033133826940184,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.3199366956468939,
+          "Governance": 0.2057034371046519
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 8,
+        "top_score": 0.49092909289295267,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.018626232910451727,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.7843137254901961,
+            "positive_rate": 0.39215686274509803,
+            "class_distribution": {
+              "0": 31,
+              "1": 20
+            },
+            "skewness": -3.0295154262122717,
+            "base_multiplier": 0.5,
+            "median_return": 0.011423247964111016,
+            "mad": 0.017606279638455985
+          },
+          "three_class": {
+            "class_distribution": {
+              "1": 17,
+              "2": 17,
+              "0": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.0008036929208174861,
+              "upper": 0.022654315564349353
+            },
+            "statistics": {
+              "median": 0.011423247964111016,
+              "mad": 0.017606279638455985,
+              "skewness": -3.0295154262122717,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.45,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "good",
+              "primary_concerns": [
+                "skewness_manageable"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "window_id": 12,
+        "period_start": "2022-10-03T00:00:00",
+        "period_end": "2023-09-25T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 32,
+            "1": 19
+          },
+          "three_class": {
+            "1": 17,
+            "2": 17,
+            "0": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.13623660771363544,
+            "correlation": 0.290140862668991,
+            "binary_auc_score": 0.6200657894736842,
+            "three_class_f1_score": 0.1691542288557214,
+            "combined_score": 0.4422016294125802,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.10094082250435532,
+            "correlation": 0.08541100916058748,
+            "binary_auc_score": 0.5509868421052633,
+            "three_class_f1_score": 0.1828545371637027,
+            "combined_score": 0.32518265644441935,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.03523624161811334,
+            "correlation": 0.05234868303390845,
+            "binary_auc_score": 0.53125,
+            "three_class_f1_score": 0.24439580483356133,
+            "combined_score": 0.19359276797412417,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.19211831049677444,
+            "binary_auc_score": 0.6134868421052632,
+            "three_class_f1_score": 0.2040998217468806,
+            "combined_score": 0.14798926527622255,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.14328304726066882,
+            "binary_auc_score": 0.5855263157894737,
+            "three_class_f1_score": 0.2206839945280438,
+            "combined_score": 0.1382009080689878,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.00826951141885117,
+            "binary_auc_score": 0.5049342105263157,
+            "three_class_f1_score": 0.25579571363429093,
+            "combined_score": 0.10519886628781679,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Governance": 0.3178971986933522,
+          "Social": 0.17914292401936163
+        },
+        "dominant_pillar": "Governance",
+        "top_driver": 19,
+        "top_score": 0.4422016294125802,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.01527439489650772,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.7450980392156863,
+            "positive_rate": 0.37254901960784315,
+            "class_distribution": {
+              "0": 32,
+              "1": 19
+            },
+            "skewness": -4.9764974092163685,
+            "base_multiplier": 0.5,
+            "median_return": 0.0085212611858455,
+            "mad": 0.016882834276655552
+          },
+          "three_class": {
+            "class_distribution": {
+              "1": 17,
+              "2": 17,
+              "0": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.003046842148978166,
+              "upper": 0.01776168545573674
+            },
+            "statistics": {
+              "median": 0.0085212611858455,
+              "mad": 0.016882834276655552,
+              "skewness": -4.9764974092163685,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.45,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "good",
+              "primary_concerns": [
+                "skewness_manageable"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "window_id": 13,
+        "period_start": "2023-01-02T00:00:00",
+        "period_end": "2023-12-25T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "1": 16,
+            "0": 35
+          },
+          "three_class": {
+            "2": 16,
+            "1": 19,
+            "0": 16
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.052589777904904045,
+            "correlation": 0.0717776524795087,
+            "binary_auc_score": 0.5446428571428571,
+            "three_class_f1_score": 0.3249676975167171,
+            "combined_score": 0.45589739020209086,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.03791151553041128,
+            "correlation": 0.014354231294080365,
+            "binary_auc_score": 0.5089285714285714,
+            "three_class_f1_score": 0.27200105631478183,
+            "combined_score": 0.3302498221827854,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.06317434177206868,
+            "binary_auc_score": 0.5392857142857144,
+            "three_class_f1_score": 0.3163851399145517,
+            "combined_score": 0.1493556301972813,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.005816525414093804,
+            "binary_auc_score": 0.5035714285714286,
+            "three_class_f1_score": 0.3037282252968528,
+            "combined_score": 0.12356783067516008,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.051675232658689306,
+            "binary_auc_score": 0.5321428571428571,
+            "three_class_f1_score": 0.22723971743579585,
+            "combined_score": 0.10955107717868137,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.054007979842834807,
+            "binary_auc_score": 0.5223214285714286,
+            "three_class_f1_score": 0.14479638009049775,
+            "combined_score": 0.07177966531405515,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.2095929820633034,
+          "Governance": 0.2010147437484203
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 8,
+        "top_score": 0.45589739020209086,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.02180859857639534,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.6274509803921569,
+            "positive_rate": 0.3137254901960784,
+            "class_distribution": {
+              "1": 16,
+              "0": 35
+            },
+            "skewness": -0.7091652758931752,
+            "base_multiplier": 0.75,
+            "median_return": 0.007764435836808871,
+            "mad": 0.018725550319448624
+          },
+          "three_class": {
+            "class_distribution": {
+              "2": 16,
+              "1": 19,
+              "0": 16
+            },
+            "class_proportions": [
+              0.3137254901960784,
+              0.37254901960784315,
+              0.3137254901960784
+            ],
+            "balance_quality": 0.9168109669192297,
+            "signal_preservation": 0.6274509803921569,
+            "thresholds": {
+              "lower": -0.005343449386805165,
+              "upper": 0.02087232106042291
+            },
+            "statistics": {
+              "median": 0.007764435836808871,
+              "mad": 0.018725550319448624,
+              "skewness": -0.7091652758931752,
+              "method_used": "three_class_skewness_aware_mad"
+            },
+            "parameters": {
+              "base_multiplier": 0.7,
+              "skew_adjustment_applied": "False",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 14,
+        "period_start": "2023-04-03T00:00:00",
+        "period_end": "2024-03-25T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "1": 15,
+            "0": 36
+          },
+          "three_class": {
+            "2": 15,
+            "1": 18,
+            "0": 18
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.09118289812705394,
+            "correlation": 0.14621603860338644,
+            "binary_auc_score": 0.5925925925925926,
+            "three_class_f1_score": 0.3990666435429706,
+            "combined_score": 0.4570836242437226,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.1121791436475208,
+            "correlation": 0.03800928741348074,
+            "binary_auc_score": 0.524074074074074,
+            "three_class_f1_score": 0.324215239566746,
+            "combined_score": 0.4436235972344095,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.020611450900625883,
+            "correlation": 0.07016464154456233,
+            "binary_auc_score": 0.5444444444444444,
+            "three_class_f1_score": 0.255569394737257,
+            "combined_score": 0.18307928968819454,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.001284210693763832,
+            "correlation": 0.025111545093609154,
+            "binary_auc_score": 0.5157407407407407,
+            "three_class_f1_score": 0.26991659703280935,
+            "combined_score": 0.12052694326781563,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.05262348115842175,
+            "binary_auc_score": 0.5333333333333333,
+            "three_class_f1_score": 0.2284200734702887,
+            "combined_score": 0.11066587011270324,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.04916693911010762,
+            "binary_auc_score": 0.5231481481481481,
+            "three_class_f1_score": 0.12669683257918551,
+            "combined_score": 0.06471115406125366,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.28297500871466275,
+          "Governance": 0.1238952218747241
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 15,
+        "top_score": 0.4570836242437226,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.021875548790300726,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.5882352941176471,
+            "positive_rate": 0.29411764705882354,
+            "class_distribution": {
+              "1": 15,
+              "0": 36
+            },
+            "skewness": -0.2650086035768667,
+            "base_multiplier": 0.75,
+            "median_return": 0.008032236692430413,
+            "mad": 0.018457749463827083
+          },
+          "three_class": {
+            "class_distribution": {
+              "2": 15,
+              "1": 18,
+              "0": 18
+            },
+            "class_proportions": [
+              0.35294117647058826,
+              0.35294117647058826,
+              0.29411764705882354
+            ],
+            "balance_quality": 0.9168109669192297,
+            "signal_preservation": 0.6470588235294118,
+            "thresholds": {
+              "lower": -0.005811075405439899,
+              "upper": 0.021875548790300726
+            },
+            "statistics": {
+              "median": 0.008032236692430413,
+              "mad": 0.018457749463827083,
+              "skewness": -0.2650086035768667,
+              "method_used": "three_class_skewness_aware_mad"
+            },
+            "parameters": {
+              "base_multiplier": 0.75,
+              "skew_adjustment_applied": "False",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 15,
+        "period_start": "2023-07-03T00:00:00",
+        "period_end": "2024-06-24T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "1": 17,
+            "0": 34
+          },
+          "three_class": {
+            "2": 17,
+            "1": 16,
+            "0": 18
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.09355237761591062,
+            "correlation": 0.22647223291979132,
+            "binary_auc_score": 0.6089965397923875,
+            "three_class_f1_score": 0.15920398009950248,
+            "combined_score": 0.4295034735819843,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.06805437546292747,
+            "correlation": 0.1017307758093548,
+            "binary_auc_score": 0.5622837370242214,
+            "three_class_f1_score": 0.30199118407052744,
+            "combined_score": 0.37525891366376407,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.02976442265148549,
+            "correlation": 0.22353099893446904,
+            "binary_auc_score": 0.6366782006920415,
+            "three_class_f1_score": 0.3640066879464965,
+            "combined_score": 0.32056567831261384,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.010307003009673021,
+            "correlation": 0.0014248079274655151,
+            "binary_auc_score": 0.5008650519031141,
+            "three_class_f1_score": 0.2766134121632843,
+            "combined_score": 0.144201213711851,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.07064477373753843,
+            "binary_auc_score": 0.5432525951557093,
+            "three_class_f1_score": 0.2771589255857381,
+            "combined_score": 0.13602210649902685,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.05086423709102767,
+            "binary_auc_score": 0.5311418685121108,
+            "three_class_f1_score": 0.2758473932208543,
+            "combined_score": 0.12845310339894847,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Governance": 0.40238119362287417,
+          "Social": 0.18231052548061005
+        },
+        "dominant_pillar": "Governance",
+        "top_driver": 19,
+        "top_score": 0.4295034735819843,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.017089981453686124,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.6666666666666666,
+            "positive_rate": 0.3333333333333333,
+            "class_distribution": {
+              "1": 17,
+              "0": 34
+            },
+            "skewness": -1.7329389385304086,
+            "base_multiplier": 0.55,
+            "median_return": 0.007764435836808871,
+            "mad": 0.018725550319448624
+          },
+          "three_class": {
+            "class_distribution": {
+              "2": 17,
+              "1": 16,
+              "0": 18
+            },
+            "class_proportions": [
+              0.35294117647058826,
+              0.3137254901960784,
+              0.3333333333333333
+            ],
+            "balance_quality": 0.9519707893571926,
+            "signal_preservation": 0.6862745098039216,
+            "thresholds": {
+              "lower": -0.0033458727212374506,
+              "upper": 0.017252232630156038
+            },
+            "statistics": {
+              "median": 0.007764435836808871,
+              "mad": 0.018725550319448624,
+              "skewness": -1.7329389385304086,
+              "method_used": "three_class_skewness_aware_mad"
+            },
+            "parameters": {
+              "base_multiplier": 0.55,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "excellent",
+              "primary_concerns": []
+            }
+          }
+        }
+      },
+      {
+        "window_id": 16,
+        "period_start": "2023-10-02T00:00:00",
+        "period_end": "2024-09-23T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "0": 33,
+            "1": 18
+          },
+          "three_class": {
+            "0": 17,
+            "2": 17,
+            "1": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.07267737283087117,
+            "correlation": 0.02229978693352242,
+            "binary_auc_score": 0.5134680134680135,
+            "three_class_f1_score": 0.2754035567715458,
+            "combined_score": 0.41801041878930123,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.04347084950670088,
+            "correlation": 0.2566566765720206,
+            "binary_auc_score": 0.6548821548821548,
+            "three_class_f1_score": 0.34152302781577754,
+            "combined_score": 0.406323494881093,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.041711544157429836,
+            "correlation": 0.17561479533185037,
+            "binary_auc_score": 0.6060606060606061,
+            "three_class_f1_score": 0.30756041951664387,
+            "combined_score": 0.35701346581304255,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.045533543198879256,
+            "correlation": 0.011223776809217325,
+            "binary_auc_score": 0.5067340067340067,
+            "three_class_f1_score": 0.2754035567715458,
+            "combined_score": 0.3020444408486649,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.017088699681644837,
+            "correlation": 0.055749467333806056,
+            "binary_auc_score": 0.5336700336700337,
+            "three_class_f1_score": 0.36680346557227544,
+            "combined_score": 0.23688316128374043,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.0,
+            "correlation": 0.15623531742046806,
+            "binary_auc_score": 0.5791245791245792,
+            "three_class_f1_score": 0.15920398009950248,
+            "combined_score": 0.11105564747311397,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Social": 0.3408153789506999,
+          "Governance": 0.23403455664307826
+        },
+        "dominant_pillar": "Social",
+        "top_driver": 10,
+        "top_score": 0.41801041878930123,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.02295971622855086,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.7058823529411765,
+            "positive_rate": 0.35294117647058826,
+            "class_distribution": {
+              "0": 33,
+              "1": 18
+            },
+            "skewness": -5.117562055818695,
+            "base_multiplier": 0.5,
+            "median_return": 0.014733382400622904,
+            "mad": 0.02056583456981989
+          },
+          "three_class": {
+            "class_distribution": {
+              "0": 17,
+              "2": 17,
+              "1": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.0037905331656464887,
+              "upper": 0.02340952934103409
+            },
+            "statistics": {
+              "median": 0.014733382400622904,
+              "mad": 0.02056583456981989,
+              "skewness": -5.117562055818695,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.45,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "good",
+              "primary_concerns": [
+                "skewness_manageable"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "window_id": 17,
+        "period_start": "2024-01-01T00:00:00",
+        "period_end": "2024-12-23T00:00:00",
+        "sample_count": 51,
+        "target_distribution": {
+          "binary": {
+            "1": 23,
+            "0": 28
+          },
+          "three_class": {
+            "1": 17,
+            "0": 17,
+            "2": 17
+          }
+        },
+        "feature_rankings": [
+          {
+            "feature": "pbs_24",
+            "driver_number": 24,
+            "pillar": "Governance",
+            "mi_score": 0.1157942737537272,
+            "correlation": 0.08299692751606674,
+            "binary_auc_score": 0.5481366459627329,
+            "three_class_f1_score": 0.367952576379389,
+            "combined_score": 0.47539919990892543,
+            "rank": 1
+          },
+          {
+            "feature": "pbs_12",
+            "driver_number": 12,
+            "pillar": "Social",
+            "mi_score": 0.057784968025426986,
+            "correlation": 0.12107540538725681,
+            "binary_auc_score": 0.5698757763975155,
+            "three_class_f1_score": 0.20518011855905152,
+            "combined_score": 0.27277309864200316,
+            "rank": 2
+          },
+          {
+            "feature": "pbs_10",
+            "driver_number": 10,
+            "pillar": "Social",
+            "mi_score": 0.03153110080224586,
+            "correlation": 0.13653097494329994,
+            "binary_auc_score": 0.579192546583851,
+            "three_class_f1_score": 0.2754035567715458,
+            "combined_score": 0.23827507395738104,
+            "rank": 3
+          },
+          {
+            "feature": "pbs_19",
+            "driver_number": 19,
+            "pillar": "Governance",
+            "mi_score": 0.03994224303691807,
+            "correlation": 0.07979979904295391,
+            "binary_auc_score": 0.5388198757763975,
+            "three_class_f1_score": 0.16666666666666666,
+            "combined_score": 0.19354902522340867,
+            "rank": 4
+          },
+          {
+            "feature": "pbs_8",
+            "driver_number": 8,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.14188513082342932,
+            "binary_auc_score": 0.5822981366459627,
+            "three_class_f1_score": 0.3246329229366165,
+            "combined_score": 0.17809649403879943,
+            "rank": 5
+          },
+          {
+            "feature": "pbs_15",
+            "driver_number": 15,
+            "pillar": "Social",
+            "mi_score": 0.0,
+            "correlation": 0.1419976169292977,
+            "binary_auc_score": 0.5822981366459627,
+            "three_class_f1_score": 0.2909074327405381,
+            "combined_score": 0.16461192226566151,
+            "rank": 6
+          }
+        ],
+        "pillar_scores": {
+          "Governance": 0.33447411256616705,
+          "Social": 0.2134391472259613
+        },
+        "dominant_pillar": "Governance",
+        "top_driver": 24,
+        "top_score": 0.47539919990892543,
+        "target_metadata": {
+          "binary": {
+            "threshold": 0.012975883964401705,
+            "method_used": "research_enhanced_binary",
+            "balance_quality": 0.9019607843137255,
+            "positive_rate": 0.45098039215686275,
+            "class_distribution": {
+              "1": 23,
+              "0": 28
+            },
+            "skewness": -6.1057761482883155,
+            "base_multiplier": 0.5,
+            "median_return": 0.006078419750860904,
+            "mad": 0.017243660533852
+          },
+          "three_class": {
+            "class_distribution": {
+              "1": 17,
+              "0": 17,
+              "2": 17
+            },
+            "class_proportions": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "balance_quality": 1.0,
+            "signal_preservation": 0.6666666666666666,
+            "thresholds": {
+              "lower": -0.0037905331656464887,
+              "upper": 0.0173469169119531
+            },
+            "statistics": {
+              "median": 0.006078419750860904,
+              "mad": 0.017243660533852,
+              "skewness": -6.1057761482883155,
+              "method_used": "three_class_percentile_corrected"
+            },
+            "parameters": {
+              "base_multiplier": 0.45,
+              "skew_adjustment_applied": "True",
+              "dynamic_multiplier_used": true
+            },
+            "quality_summary": {
+              "overall_quality": "good",
+              "primary_concerns": [
+                "skewness_manageable"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "window_parameters": {
+      "window_size": 52,
+      "step_size": 13,
+      "num_windows": 17
+    },
+    "pillar_regimes": {
+      "total_regimes": 3,
+      "regime_count_by_pillar": {
+        "Social": 2,
+        "Governance": 1
+      },
+      "average_regime_duration": 5.666666666666667,
+      "dominant_regime_pillar": "Social",
+      "regime_stability": 0.8235294117647058,
+      "current_regime": "Social"
+    },
+    "pillar_regime_list": [
+      {
+        "regime_id": 1,
+        "regime_start": 0,
+        "regime_end": 0,
+        "pillar": "Social",
+        "duration_windows": 1,
+        "period_start": "2020-01-06T00:00:00",
+        "period_end": "2020-12-28T00:00:00",
+        "avg_pillar_scores": {
+          "Social": 0.22876263039092887,
+          "Governance": 0.1382449399762793
+        }
+      },
+      {
+        "regime_id": 2,
+        "regime_start": 1,
+        "regime_end": 6,
+        "pillar": "Governance",
+        "duration_windows": 6,
+        "period_start": "2020-04-06T00:00:00",
+        "period_end": "2022-06-27T00:00:00",
+        "avg_pillar_scores": {
+          "Governance": 0.2581107329588132,
+          "Social": 0.2450291464845242
+        }
+      },
+      {
+        "regime_id": 3,
+        "regime_start": 7,
+        "regime_end": 16,
+        "pillar": "Social",
+        "duration_windows": 10,
+        "period_start": "2021-10-04T00:00:00",
+        "period_end": "2024-12-23T00:00:00",
+        "avg_pillar_scores": {
+          "Social": 0.24815931400453817,
+          "Governance": 0.2427708621832383
+        }
+      }
+    ],
+    "individual_regimes": {
+      "8": {
+        "regimes": [
+          {
+            "regime_start": 0,
+            "regime_end": 16,
+            "regime_type": "stable",
+            "avg_rank": 3.9411764705882355,
+            "duration": 17
+          }
+        ],
+        "num_regimes": 1,
+        "regime_stability": 0.9411764705882353,
+        "current_regime": "stable",
+        "improvement_periods": 0,
+        "decline_periods": 0,
+        "pillar": "Social",
+        "avg_rank": 3.9411764705882355,
+        "rank_volatility": 1.7977302105807207
+      },
+      "10": {
+        "regimes": [
+          {
+            "regime_start": 0,
+            "regime_end": 16,
+            "regime_type": "stable",
+            "avg_rank": 3.1176470588235294,
+            "duration": 17
+          }
+        ],
+        "num_regimes": 1,
+        "regime_stability": 0.9411764705882353,
+        "current_regime": "stable",
+        "improvement_periods": 0,
+        "decline_periods": 0,
+        "pillar": "Social",
+        "avg_rank": 3.1176470588235294,
+        "rank_volatility": 1.6762125704441186
+      },
+      "12": {
+        "regimes": [
+          {
+            "regime_start": 0,
+            "regime_end": 16,
+            "regime_type": "stable",
+            "avg_rank": 2.823529411764706,
+            "duration": 17
+          }
+        ],
+        "num_regimes": 1,
+        "regime_stability": 0.9411764705882353,
+        "current_regime": "stable",
+        "improvement_periods": 0,
+        "decline_periods": 0,
+        "pillar": "Social",
+        "avg_rank": 2.823529411764706,
+        "rank_volatility": 1.042355596862903
+      },
+      "15": {
+        "regimes": [
+          {
+            "regime_start": 0,
+            "regime_end": 16,
+            "regime_type": "stable",
+            "avg_rank": 4.352941176470588,
+            "duration": 17
+          }
+        ],
+        "num_regimes": 1,
+        "regime_stability": 0.9411764705882353,
+        "current_regime": "stable",
+        "improvement_periods": 0,
+        "decline_periods": 0,
+        "pillar": "Social",
+        "avg_rank": 4.352941176470588,
+        "rank_volatility": 1.7129670327718867
+      },
+      "19": {
+        "regimes": [
+          {
+            "regime_start": 0,
+            "regime_end": 16,
+            "regime_type": "stable",
+            "avg_rank": 3.588235294117647,
+            "duration": 17
+          }
+        ],
+        "num_regimes": 1,
+        "regime_stability": 0.9411764705882353,
+        "current_regime": "stable",
+        "improvement_periods": 0,
+        "decline_periods": 0,
+        "pillar": "Governance",
+        "avg_rank": 3.588235294117647,
+        "rank_volatility": 2.0017293561380654
+      },
+      "24": {
+        "regimes": [
+          {
+            "regime_start": 0,
+            "regime_end": 16,
+            "regime_type": "stable",
+            "avg_rank": 3.176470588235294,
+            "duration": 17
+          }
+        ],
+        "num_regimes": 1,
+        "regime_stability": 0.9411764705882353,
+        "current_regime": "stable",
+        "improvement_periods": 0,
+        "decline_periods": 0,
+        "pillar": "Governance",
+        "avg_rank": 3.176470588235294,
+        "rank_volatility": 1.338800785498946
+      }
+    },
+    "driver_stability": {
+      "8": {
+        "avg_rank": 3.9411764705882355,
+        "rank_std": 1.7977302105807207,
+        "avg_score": 0.24861402722445525,
+        "score_std": 0.13715466013323716,
+        "rank_stability": 0.3574326059811291,
+        "score_stability": 0.44832292182206457,
+        "combined_stability": 0.5105375052389245,
+        "rank_trend_slope": 0.014705882352941175,
+        "score_trend_slope": 0.002144859102445817,
+        "rank_trend_r2": 0.001605995717344754,
+        "score_trend_r2": 0.0058693180194321955,
+        "windows_analyzed": 17,
+        "pillar": "Social",
+        "current_regime": "stable",
+        "is_emerging": false,
+        "is_declining": false
+      },
+      "12": {
+        "avg_rank": 2.823529411764706,
+        "rank_std": 1.042355596862903,
+        "avg_score": 0.24768489585700054,
+        "score_std": 0.11053066604549874,
+        "rank_stability": 0.4896306997351583,
+        "score_stability": 0.5537448270187901,
+        "combined_stability": 0.6055855048192265,
+        "rank_trend_slope": 0.11519607843137254,
+        "score_trend_slope": -0.0067549303927731405,
+        "rank_trend_r2": 0.29312632696390656,
+        "score_trend_r2": 0.08963702288617485,
+        "windows_analyzed": 17,
+        "pillar": "Social",
+        "current_regime": "stable",
+        "is_emerging": false,
+        "is_declining": false
+      },
+      "24": {
+        "avg_rank": 3.176470588235294,
+        "rank_std": 1.338800785498946,
+        "avg_score": 0.2552674161719976,
+        "score_std": 0.11230655238834039,
+        "rank_stability": 0.42756955025849536,
+        "score_stability": 0.5600435258346137,
+        "combined_stability": 0.5832805245548907,
+        "rank_trend_slope": -0.05392156862745098,
+        "score_trend_slope": 0.005773387095255854,
+        "rank_trend_r2": 0.03893178893178893,
+        "score_trend_r2": 0.0634252817641562,
+        "windows_analyzed": 17,
+        "pillar": "Governance",
+        "current_regime": "stable",
+        "is_emerging": false,
+        "is_declining": false
+      },
+      "15": {
+        "avg_rank": 4.352941176470588,
+        "rank_std": 1.7129670327718867,
+        "avg_score": 0.20221600373694779,
+        "score_std": 0.11829898182707305,
+        "rank_stability": 0.3686001296441418,
+        "score_stability": 0.41498704533315767,
+        "combined_stability": 0.5016701641085668,
+        "rank_trend_slope": -0.0784313725490196,
+        "score_trend_slope": 0.009358513385659245,
+        "rank_trend_r2": 0.05031446540880502,
+        "score_trend_r2": 0.15019758850194628,
+        "windows_analyzed": 17,
+        "pillar": "Social",
+        "current_regime": "stable",
+        "is_emerging": false,
+        "is_declining": false
+      },
+      "10": {
+        "avg_rank": 3.1176470588235294,
+        "rank_std": 1.6762125704441186,
+        "avg_score": 0.2851393436153507,
+        "score_std": 0.13403973523260765,
+        "rank_stability": 0.3736623955226582,
+        "score_stability": 0.5299149758392321,
+        "combined_stability": 0.5496662426624032,
+        "rank_trend_slope": -0.009803921568627442,
+        "score_trend_slope": 0.0009199382579948694,
+        "rank_trend_r2": 0.0008210180623973711,
+        "score_trend_r2": 0.0011304763471353964,
+        "windows_analyzed": 17,
+        "pillar": "Social",
+        "current_regime": "stable",
+        "is_emerging": false,
+        "is_declining": false
+      },
+      "19": {
+        "avg_rank": 3.588235294117647,
+        "rank_std": 2.0017293561380654,
+        "avg_score": 0.22880528495288963,
+        "score_std": 0.13846056076377816,
+        "rank_stability": 0.33314129335316556,
+        "score_stability": 0.3948541844551938,
+        "combined_stability": 0.47943348524099083,
+        "rank_trend_slope": 0.012254901960784324,
+        "score_trend_slope": 0.00042738339496016243,
+        "rank_trend_r2": 0.0008995394358088674,
+        "score_trend_r2": 0.00022866218998499472,
+        "windows_analyzed": 17,
+        "pillar": "Governance",
+        "current_regime": "stable",
+        "is_emerging": false,
+        "is_declining": false
+      }
+    }
+  },
+  "summary": {
+    "entity_id": 456,
+    "top_material_drivers": [
+      12,
+      10,
+      8,
+      15,
+      19,
+      24
+    ],
+    "top_stable_drivers": [
+      12,
+      24,
+      10
+    ],
+    "emerging_drivers": [],
+    "current_esg_regime": "Social",
+    "regime_stability": 0.8235294117647058,
+    "windows_analyzed": 17
+  }
+}

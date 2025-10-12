@@ -53,9 +53,9 @@ class DatabaseConfig:
     
     def __init__(self, 
                  host: str = "localhost",
-                 database: str = "ESG_QR_1",
+                 database: str = ",,,",
                  user: str = "postgres",
-                 password: str = "Psg@240425",
+                 password: str = ",,,",
                  port: int = 5432):
         """
         Initialize database configuration.

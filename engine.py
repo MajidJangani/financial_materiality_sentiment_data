@@ -777,7 +777,7 @@ def refine_features_with_rf(X_selected_12, y, selected_drivers_12, target_final=
     
     if verbose:
         print(f"    RF Configuration:")
-        print(f"      Trees: {rf_refiner.n_estimators}, Max depth: {rf_refiner.max_depth}")
+        print(f"      Trees: {rf_refiner.get_params()['n_estimators']}, Max depth: {rf_refiner.get_params()['max_depth']}")
         print(f"      Features per split: √{len(selected_features)} ≈ {int(np.sqrt(len(selected_features)))}")
     
     # Train Random Forest
@@ -943,7 +943,8 @@ def calculate_window_materiality_comprehensive(window_df: pd.DataFrame,
     X_window = window_df[selected_features].fillna(0)
     
     # Calculate returns
-    returns = np.log(window_df['close_price'] / window_df['close_price'].shift(1)).dropna()
+    returns = np.log(window_df['close_price'] / window_df['close_price'].shift(1))
+    returns = returns[~np.isnan(returns)]
     
     # Early exit if insufficient data
     if len(returns) < 30:
@@ -977,13 +978,24 @@ def calculate_window_materiality_comprehensive(window_df: pd.DataFrame,
         feature_correlations = []
         feature_aucs_binary = []
         feature_f1s_3class = []
-        
+
         for i, feature in enumerate(selected_features):
             # Spearman correlation
-            corr, p_value = spearmanr(X_window.iloc[:, i], targets_binary)
-            feature_correlations.append(abs(corr) if not np.isnan(corr) else 0)
-            
-            # Binary AUC
+            try:
+                corr_coef, p_val = spearmanr(  # type: ignore
+                    X_window.iloc[:, i].values, 
+                    np.array(targets_binary)
+                )
+                
+                corr_value = abs(float(corr_coef))
+                
+                feature_correlations.append(
+                    corr_value if not np.isnan(corr_value) else 0
+                )
+                
+            except Exception:
+                feature_correlations.append(0)
+                    # Binary AUC
             try:
                 binary_auc = roc_auc_score(targets_binary, X_window.iloc[:, i])
                 binary_auc = max(binary_auc, 1 - binary_auc)
@@ -991,7 +1003,7 @@ def calculate_window_materiality_comprehensive(window_df: pd.DataFrame,
             except:
                 feature_aucs_binary.append(0.5)
             
-            # 3-class F1 score (simple threshold classifier)
+            # 3-class F1 score
             try:
                 feature_median = np.median(X_window.iloc[:, i])
                 simple_pred = np.where(
@@ -1443,14 +1455,23 @@ def calculate_driver_stability_metrics(walkforward_results: List[Dict],
             rank_stability = 1.0 / (1.0 + rank_std)
             score_stability = 1.0 - min(score_std / max(avg_score, 0.001), 1.0)
             
-            # Trend analysis
+            ## Trend analysis
             if len(ranks) >= 5:
                 x = np.arange(len(ranks))
-                rank_slope, _, rank_r_value, _, _ = stats.linregress(x, ranks)
-                score_slope, _, score_r_value, _, _ = stats.linregress(x, scores)
+                
+                # Use attribute access (best for scipy 1.15.3)
+                rank_result = stats.linregress(x, ranks)
+                score_result = stats.linregress(x, scores)
+                
+                rank_slope = float(rank_result.slope)
+                rank_r_value = float(rank_result.rvalue)
+                score_slope = float(score_result.slope)
+                score_r_value = float(score_result.rvalue)
             else:
-                rank_slope, rank_r_value = 0, 0
-                score_slope, score_r_value = 0, 0
+                rank_slope = 0.0
+                rank_r_value = 0.0
+                score_slope = 0.0
+                score_r_value = 0.0
             
             # Get regime info
             regime_info = individual_regimes.get(driver_num, {})
@@ -1462,14 +1483,15 @@ def calculate_driver_stability_metrics(walkforward_results: List[Dict],
                 0.2 * regime_info.get('regime_stability', 0)
             )
             
+            # Store driver stability metrics
             driver_stability[driver_num] = {
-                'avg_rank': avg_rank,
-                'rank_std': rank_std,
-                'avg_score': avg_score,
-                'score_std': score_std,
-                'rank_stability': rank_stability,
-                'score_stability': score_stability,
-                'combined_stability': combined_stability,
+                'avg_rank': float(avg_rank),
+                'rank_std': float(rank_std),
+                'avg_score': float(avg_score),
+                'score_std': float(score_std),
+                'rank_stability': float(rank_stability),
+                'score_stability': float(score_stability),
+                'combined_stability': float(combined_stability),
                 'rank_trend_slope': rank_slope,
                 'score_trend_slope': score_slope,
                 'rank_trend_r2': rank_r_value ** 2,
@@ -1489,8 +1511,6 @@ def calculate_driver_stability_metrics(walkforward_results: List[Dict],
         print(f"    Emerging drivers detected: {emerging_drivers}")
     
     return driver_stability
-
-
 # =================================================================
 # SECTION 5: UTILITY FUNCTIONS
 # =================================================================
@@ -1523,6 +1543,63 @@ def get_esg_pillar(driver_number: int) -> str:
         return "Governance"
     else:
         return "Unknown"
+    
+def get_driver_name(driver_number: int) -> str:
+    """
+    Map driver number to human-readable name.
+    
+    Based on SASB materiality framework adapted by Mettle Capital.
+    Note: Driver 16 is intentionally omitted from the taxonomy.
+    
+    Args:
+        driver_number: PBS driver number (1-27, excluding 16)
+        
+    Returns:
+        Driver name string
+        
+    Example:
+        >>> name = get_driver_name(3)
+        >>> print(name)
+        Energy Management
+    """
+    driver_names = {
+        # Environmental (1-6)
+        1: "Air Quality",
+        2: "Ecological Impacts",
+        3: "Energy Management",
+        4: "GHG Emissions",
+        5: "Waste & Hazardous Materials Management",
+        6: "Water & Wastewater Management",
+        
+        # Social (7-15, 17)
+        7: "Access & Affordability",
+        8: "Customer Privacy",
+        9: "Customer Welfare",
+        10: "Data Security",
+        11: "Employee Engagement",
+        12: "Employee Health and Safety",
+        13: "Human Rights & Community Relations",
+        14: "Labour Practices",
+        15: "Product Quality & Safety",
+        16: "Selling Practices & Product Labelling",
+        
+        # Governance (17-26)
+        17: "Business Ethics",
+        18: "Business Model Resilience",
+        19: "Competitive Behaviour",
+        20: "Critical Incident Risk Management",
+        21: "Management of the Legal & Regulatory Environment",
+        22: "Materials Sourcing & Efficiency",
+        23: "Product Design & Lifecycle Management",
+        24: "Physical Impacts of Climate Change",
+        25: "Supply Chain Management",
+        26: "System Risk Management"
+    }
+    
+    if driver_number == 16:
+        return "[Reserved]"
+    
+    return driver_names.get(driver_number, f"Driver {driver_number}")
 
 
 def calculate_avg_pillar_scores(window_infos: List[Dict]) -> Dict[str, float]:
@@ -1549,7 +1626,7 @@ def calculate_avg_pillar_scores(window_infos: List[Dict]) -> Dict[str, float]:
         for pillar, score in window['pillar_scores'].items():
             pillar_totals[pillar].append(score)
     
-    return {pillar: np.mean(scores) for pillar, scores in pillar_totals.items()}
+    return {str(pillar): float(np.mean(scores)) for pillar, scores in pillar_totals.items()}
 
 
 # =================================================================
@@ -1587,7 +1664,9 @@ __all__ = [
     
     # Utilities
     'get_esg_pillar',
+    'get_driver_name',
     'calculate_avg_pillar_scores',
+
     
     # Configuration
     'DEFAULT_CONFIG'

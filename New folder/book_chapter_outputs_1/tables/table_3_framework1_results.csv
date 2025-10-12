@@ -1,7 +1,0 @@
-Rank,Driver,ESG Pillar,MI Score,AUC Score,RF Importance,Composite Score
-1,Driver 3,Environmental,0.0748,0.5751,0.2016,0.6763
-2,Driver 13,Social,0.0163,0.5641,0.1585,0.1830
-3,Driver 1,Environmental,0.0327,0.6038,0.1226,0.3491
-4,Driver 12,Social,0.0235,0.5665,0.1056,0.2451
-5,Driver 15,Social,0.0200,0.5340,0.0887,0.1914
-6,Driver 24,Governance,0.0185,0.5363,0.0694,0.1809

@@ -1,7 +1,0 @@
-
-Table 1 Description:
-This table presents the fundamental characteristics of the dataset used for ESG materiality 
-analysis. The entity comprises 274 weekly observations spanning 5.3 years, with 22 
-PBS (Proprietary Behavioral Signals) features representing ESG sentiment drivers. The high data 
-quality and complete volume information ensure robust statistical inference throughout the analysis.
-        

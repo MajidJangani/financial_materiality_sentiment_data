@@ -1,9 +1,0 @@
-Metric,Value,Interpretation
-Binary Target Balance Quality,0.784,Excellent
-3-Class Target Balance Quality,0.761,Excellent
-Signal Preservation (3-Class),0.777,High
-Average F1 Score (3-Class),0.274,Moderate
-Min F1 Score (Window),0.174,Robust
-Max F1 Score (Window),0.440,Excellent
-Number of Features Selected,6,Optimal
-Feature-to-Sample Ratio,1:45.5,Conservative
